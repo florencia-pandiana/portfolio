@@ -23,6 +23,21 @@ body{
 }
 
 .name{
-    position: absolute;
-    bottom: 20px;
+  position: absolute;
+  bottom: clamp(4rem, 7vw, 4rem);;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  font-weight: 500;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.file{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background-color: #6E7378;
 }
