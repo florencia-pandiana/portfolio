@@ -98,3 +98,18 @@ img{
   z-index: 3;
 }
 
+/*---homescreen---*/
+.homescreen{
+    /* position: relative; */
+    margin: clamp(3rem, 5vw, 4rem);
+    text-align: center;
+    color: #6E7378;
+}
+
+.taskbar{
+  position: absolute;
+  bottom: 50%;
+  width: 100%;
+  height: fit-content;
+  background-color: #6E7378;
+}

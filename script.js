@@ -17,3 +17,13 @@ updateClock();
 setInterval(updateClock, 10000);
 
 /*---tap to unlock---*/
+const lockscreen = document.getElementById('lockscreen');
+const homescreen = document.getElementById('homescreen');
+
+lockscreen.addEventListener('click', () => {
+  lockscreen.classList.add('unlocking');
+  setTimeout(() =>{
+    lockscreen.style.display = 'none';
+    homescreen.style.display = 'block';
+  }, 400);
+});
