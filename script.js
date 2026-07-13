@@ -1,3 +1,5 @@
+/*---lockscreen---*/
+
 function updateClock() {
   const now = new Date();
 
@@ -13,3 +15,5 @@ function updateClock() {
 
 updateClock();
 setInterval(updateClock, 10000);
+
+/*---tap to unlock---*/

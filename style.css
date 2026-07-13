@@ -3,15 +3,17 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
+/*---lockscreen---*/
+
 .lockscreen{
     /* position: relative; */
-    margin: clamp(4rem, 7vw, 4rem);
+    margin: clamp(3rem, 5vw, 4rem);
     text-align: center;
     color: #6E7378;
 }
 
 .time {
-  font-size: clamp(5rem, 19vw, 8rem);
+  font-size: clamp(6rem, 19vw, 7rem);
   font-weight: 500;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -24,7 +26,7 @@ body{
 
 .name{
   position: absolute;
-  bottom: clamp(4rem, 7vw, 4rem);;
+  bottom: clamp(3rem, 7vw, 3rem);;
   left: 50%;
   transform: translateX(-50%);
   font-size: clamp(1.3rem, 4vw, 1.9rem);
@@ -32,12 +34,67 @@ body{
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.file{
+.folder {
   position: absolute;
-  top: 50%;
+  top: 50%; /* tweak this number to match where the top currently sits */
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  background-color: #6E7378;
+  transform: translateX(-50%); /* removed the -50% vertical shift */
+  width: clamp(20px, 70vw, 180px);
 }
+
+.folder-tab {
+  position: relative;
+  width: 40%;
+  height: 0.5rem;
+  background-color: #B9B9B9;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.folder-body {
+  position: relative;
+  width: 100%;
+  height: clamp(30px, 60vw, 40px);
+  background-color: #B9B9B9;
+  border-radius: 0 0.75rem 0rem 0rem;
+}
+
+.folder-body1 {
+  position: absolute;
+  display: flex;
+  left: 5%;
+  justify-content: center;
+  align-items: center;
+  top: 1rem;
+  width: 90%;
+  height: clamp(30px, 60vw, 50px);
+  background-color: #ffffff;
+  border-radius: 0.75rem ;
+  z-index: 1;
+}
+
+.folder-body2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 1.4rem;
+  /* left: 0.5rem; */
+  width: 100%;
+  height: clamp(20px, 80vw, 130px);
+  background-color: #DBDBDB;
+  border-radius: 0.75rem;
+  z-index: 2;
+  font-family: "Palanquin Dark", sans-serif;
+  color: #A4A4A4;
+  font-size: clamp(4rem, 12vw, 5rem);
+  font-weight: 500;
+}
+
+img{
+  position: absolute;
+  left: 5%;
+  top: 70%;
+  width: clamp(40px, 70vw, 40px);
+  z-index: 3;
+}
+
