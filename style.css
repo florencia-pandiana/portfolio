@@ -1,3 +1,9 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 body{
     background-color: #EFEDE7;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
@@ -10,6 +16,7 @@ body{
     margin: clamp(3rem, 5vw, 4rem);
     text-align: center;
     color: #6E7378;
+    transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .time {
@@ -98,19 +105,69 @@ img{
   z-index: 3;
 }
 
+.lockscreen.unlocking {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+
 /*---homescreen---*/
 .homescreen{
     position: relative;
-    /* margin: clamp(3rem, 5vw, 4rem); */
-    /* text-align: center; */
-    color: #6E7378;
     height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 .taskbar{
   position: absolute;
-  bottom: 50%;
-  width: 100%;
-  height: fit-content;
-  background-color: #6E7378;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(0rem, 4vh, 2rem);
+  width: 50%;
+  height: clamp(4.3rem, 10vw, 5rem);
+  background-color: rgba(110, 115, 120, 0.69);
+  border-radius: 0.75rem;
+}
+ 
+.homescreen .folder {
+  position: relative;
+  margin: 0;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: clamp(1.25rem, 30vw, 4.375rem);
+  height: clamp(1.75rem, 33vw, 3.3rem);
+}
+
+.homescreen .folder-tab {
+  left: 0;
+  height: clamp(0rem, 1.2vw, 0.1rem);
+  border-radius: 0.15rem 0.15rem 0 0;
+}
+
+.homescreen .folder-body {
+  height: clamp(1rem, 30vw, 2.2rem);
+  border-radius: 0rem 0.3rem;
+}
+
+.homescreen .folder-body1 {
+  top: clamp(0.34rem, 3vw, 0.34em);
+  height: clamp(0.625rem, 25vw, 1.875rem);
+  border-radius: 0.3rem;
+}
+
+.homescreen .folder-body2 {
+  top: clamp(0.6rem, 8vw, 0.7rem);
+  height: clamp(1.25rem, 30vw, 2.8rem);
+  font-size: clamp(1rem, 5vw, 1.7rem);
+  border-radius: 0.3rem;
+}
+
+.homescreen img {
+  width: clamp(0.7rem, 15vw, 0.9rem);
+  top: 25%;
 }
