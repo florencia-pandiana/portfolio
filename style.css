@@ -100,10 +100,11 @@ img{
 
 /*---homescreen---*/
 .homescreen{
-    /* position: relative; */
-    margin: clamp(3rem, 5vw, 4rem);
-    text-align: center;
+    position: relative;
+    /* margin: clamp(3rem, 5vw, 4rem); */
+    /* text-align: center; */
     color: #6E7378;
+    height: 100%;
 }
 
 .taskbar{

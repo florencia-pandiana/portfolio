@@ -21,6 +21,7 @@ const lockscreen = document.getElementById('lockscreen');
 const homescreen = document.getElementById('homescreen');
 
 lockscreen.addEventListener('click', () => {
+  alert('clicked!');
   lockscreen.classList.add('unlocking');
   setTimeout(() =>{
     lockscreen.style.display = 'none';
