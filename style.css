@@ -4,19 +4,21 @@ html, body {
   overflow: hidden;
 }
 
-body{
-    background-color: #EFEDE7;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+body {
+  background-color: #EFEDE7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
 /*---lockscreen---*/
-
-.lockscreen{
-    /* position: relative; */
-    margin: clamp(3rem, 5vw, 4rem);
-    text-align: center;
-    color: #6E7378;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+.lockscreen {
+  position: relative;
+  height: 100dvh;
+  margin: 0;
+  padding: clamp(3rem, 5vw, 4rem);
+  box-sizing: border-box;
+  text-align: center;
+  color: #6E7378;
+  transition: opacity 0.6s ease;
 }
 
 .time {
@@ -31,9 +33,9 @@ body{
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.name{
+.name {
   position: absolute;
-  bottom: clamp(3rem, 7vw, 3rem);;
+  bottom: clamp(3rem, 7vw, 3rem);
   left: 50%;
   transform: translateX(-50%);
   font-size: clamp(1.3rem, 4vw, 1.9rem);
@@ -41,28 +43,40 @@ body{
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+.lockscreen.unlocking {
+  opacity: 0;
+}
+
+/*---shared folder---*/
 .folder {
-  position: absolute;
-  top: 50%; /* tweak this number to match where the top currently sits */
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%); /* removed the -50% vertical shift */
-  width: clamp(20px, 70vw, 180px);
+  width: clamp(1.25rem, 70vw, 15.625rem);
+  height: clamp(1rem, 56vw, 12.5rem);
+  transform: translate(-50%, -50%);
+  transition: top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease;
+  /* pointer-events: none; */
+  container-type: inline-size;
 }
 
 .folder-tab {
   position: relative;
   width: 40%;
-  height: 0.5rem;
+  height: 6%;
   background-color: #B9B9B9;
+  margin-bottom: -1%;
   border-radius: 0.75rem 0.75rem 0 0;
+  transition: height 0.4s ease, margin-bottom 0.4s ease, border-radius 0.4s ease;
 }
 
 .folder-body {
   position: relative;
   width: 100%;
-  height: clamp(30px, 60vw, 40px);
+  height: 25%;
   background-color: #B9B9B9;
-  border-radius: 0 0.75rem 0rem 0rem;
+  border-radius: 0 0.75rem 0 0;
+  transition: height 0.4s ease, border-radius 0.4s ease;
 }
 
 .folder-body1 {
@@ -71,12 +85,13 @@ body{
   left: 5%;
   justify-content: center;
   align-items: center;
-  top: 1rem;
+  top: 8%;
   width: 90%;
-  height: clamp(30px, 60vw, 50px);
+  height: 30%;
   background-color: #ffffff;
-  border-radius: 0.75rem ;
+  border-radius: 0.75rem;
   z-index: 1;
+  transition: height 0.4s ease, border-radius 0.4s ease;
 }
 
 .folder-body2 {
@@ -84,90 +99,160 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 1.4rem;
-  /* left: 0.5rem; */
+  top: 13%;
+  left: 0;
   width: 100%;
-  height: clamp(20px, 80vw, 130px);
+  height: 83%;
   background-color: #DBDBDB;
   border-radius: 0.75rem;
   z-index: 2;
   font-family: "Palanquin Dark", sans-serif;
   color: #A4A4A4;
-  font-size: clamp(4rem, 12vw, 5rem);
+  font-size: 45cqw;
   font-weight: 500;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease, border-radius 0.4s ease, clip-path 0.4s ease;
 }
 
-img{
+img {
   position: absolute;
-  left: 5%;
-  top: 70%;
-  width: clamp(40px, 70vw, 40px);
+  left: 0.3rem;
+  top: 2.8rem;
+  width: 2.8rem;
   z-index: 3;
+  transform: perspective(120px) rotateX(0deg);
+  transform-origin: bottom;
+  transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, transform 0.4s ease;
 }
-
-.lockscreen.unlocking {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
 
 /*---homescreen---*/
-.homescreen{
-    position: relative;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
+.homescreen {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
-.taskbar{
+.taskbar {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   left: 50%;
   transform: translateX(-50%);
-  bottom: clamp(0rem, 4vh, 2rem);
-  width: 50%;
-  height: clamp(4.3rem, 10vw, 5rem);
-  background-color: rgba(110, 115, 120, 0.69);
-  border-radius: 0.75rem;
+  top: calc(100vh - 6rem);
+  bottom: 1.5rem;
+  width: clamp(18rem, 40vw, 28rem);
+  height: 4.5rem;
+  background-color: #b1b1b18c;
+  border-radius: 1rem;
+  box-sizing: border-box;
 }
- 
-.homescreen .folder {
+
+.folder.docked {
+  top: calc(100% - 5.4rem);
+  width: 4.375rem;
+  height: 3.5rem;
+  transform: translate(-50%, 0);
+}
+
+.folder.docked .folder-tab {
+  height: 0.3rem;
+  margin-bottom: -0.08rem;
+  border-radius: 0.2rem 0.2rem 0 0;
+}
+
+.folder.docked .folder-body {
+  height: 2.5rem;
+  border-radius: 0 0.35rem;
+}
+
+.folder.docked .folder-body1 {
+  height: 0rem;
+  border-radius: 0 0.35rem;
+}
+
+.folder.docked .folder-body2 {
+  top: 0.7rem;
+  left: -8%;
+  width: 116%;
+  height: 2.5rem;
+  border-radius: 0.35rem;
+  clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 7% 100%);
+}
+
+.folder-body2 span {
+  display: inline-block;
+  transform: scale(1);
+  transition: transform 0.4s ease;
+}
+
+.folder.docked .folder-body2 span {
+  transform: perspective(120px) rotateX(-30deg);
+}
+
+.folder.docked img {
+  top: 0.9rem;
+  left: -0.15rem;
+  width: 0.9rem;
+  transform: perspective(120px) rotateX(-30deg);
+}
+
+.whole-folder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
-  margin: 0;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  width: clamp(18rem, 40vw, 28rem);
+  height: 10%;
+}
+
+.todo{
+  background-color: #c2893b;
+  /* display: flex; */
+  position: absolute; 
+  top: calc(40% - 3rem);
+  left: 50%;
+  transform: translate(-50%);
+  width: clamp(18rem, 40vw, 28rem);
+  height: 40%;
+}
+
+.whole-folder .folder {
+  position: relative;
   top: auto;
   left: auto;
   transform: none;
-  width: clamp(1.25rem, 30vw, 4.375rem);
-  height: clamp(1.75rem, 33vw, 3.3rem);
+  width: 5rem;
+  height: 4rem;
 }
 
-.homescreen .folder-tab {
-  left: 0;
-  height: clamp(0rem, 1.2vw, 0.1rem);
-  border-radius: 0.15rem 0.15rem 0 0;
+.whole-folder .folder-tab {
+  height: 0.2rem;
 }
 
-.homescreen .folder-body {
-  height: clamp(1rem, 30vw, 2.2rem);
-  border-radius: 0rem 0.3rem;
+.whole-folder .folder-body {
+  height: 3.6rem;
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
 }
 
-.homescreen .folder-body1 {
-  top: clamp(0.34rem, 3vw, 0.34em);
-  height: clamp(0.625rem, 25vw, 1.875rem);
-  border-radius: 0.3rem;
+.whole-folder .folder-body1 {
+  top: 0.4rem;
+  height: 3rem;
+  border-radius: 0.5rem;
 }
 
-.homescreen .folder-body2 {
-  top: clamp(0.6rem, 8vw, 0.7rem);
-  height: clamp(1.25rem, 30vw, 2.8rem);
-  font-size: clamp(1rem, 5vw, 1.7rem);
-  border-radius: 0.3rem;
+.whole-folder .folder-body2 {
+  top: 0.6rem;
+  left: -2%;
+  height: 3.5rem;
+  width: 103%;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+
 }
 
-.homescreen img {
-  width: clamp(0.7rem, 15vw, 0.9rem);
-  top: 25%;
+.whole-folder img {
+  width: 1.3rem;
+  top: 0.8rem;
 }
