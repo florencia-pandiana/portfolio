@@ -50,7 +50,7 @@ body {
 /*---shared folder---*/
 .folder {
   position: fixed;
-  top: 50%;
+  top: 55%;
   left: 50%;
   width: clamp(1.25rem, 70vw, 15.625rem);
   height: clamp(1rem, 56vw, 12.5rem);
