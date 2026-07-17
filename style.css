@@ -9,142 +9,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
-/*---lockscreen---*/
-.lockscreen {
-  position: relative;
-  height: 100dvh;
-  margin: 0;
-  padding: clamp(3rem, 5vw, 4rem);
-  box-sizing: border-box;
-  text-align: center;
-  color: #6E7378;
-  transition: opacity 0.6s ease;
-}
-
-.time {
-  font-size: clamp(6rem, 19vw, 7rem);
-  font-weight: 500;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.date {
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
-  font-weight: 500;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.name {
-  position: absolute;
-  bottom: clamp(3rem, 7vw, 3rem);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
-  font-weight: 500;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.lockscreen.unlocking {
-  opacity: 0;
-}
-
-/*---shared folder---*/
-.folder {
-  position: fixed;
-  top: 55%;
-  left: 50%;
-  width: clamp(1.25rem, 70vw, 15.625rem);
-  height: clamp(1rem, 56vw, 12.5rem);
-  transform: translate(-50%, -50%);
-  transition: top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease;
-  /* pointer-events: none; */
-  container-type: inline-size;
-}
-
-.folder-tab {
-  position: relative;
-  width: 40%;
-  height: 6%;
-  background-color: #B9B9B9;
-  margin-bottom: -1%;
-  border-radius: 0.75rem 0.75rem 0 0;
-  transition: height 0.4s ease, margin-bottom 0.4s ease, border-radius 0.4s ease;
-}
-
-.folder-body {
-  position: relative;
-  width: 100%;
-  height: 25%;
-  background-color: #B9B9B9;
-  border-radius: 0 0.75rem 0 0;
-  transition: height 0.4s ease, border-radius 0.4s ease;
-}
-
-.folder-body1 {
-  position: absolute;
-  display: flex;
-  left: 5%;
-  justify-content: center;
-  align-items: center;
-  top: 8%;
-  width: 90%;
-  height: 30%;
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  z-index: 1;
-  transition: height 0.4s ease, border-radius 0.4s ease;
-}
-
-.folder-body2 {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 13%;
-  left: 0;
-  width: 100%;
-  height: 83%;
-  background-color: #DBDBDB;
-  border-radius: 0.75rem;
-  z-index: 2;
-  font-family: "Palanquin Dark", sans-serif;
-  color: #A4A4A4;
-  font-size: 45cqw;
-  font-weight: 500;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease, border-radius 0.4s ease, clip-path 0.4s ease;
-}
-
-img {
-  position: absolute;
-  left: 0.3rem;
-  top: 2.8rem;
-  width: 2.8rem;
-  z-index: 3;
-  transform: perspective(120px) rotateX(0deg);
-  transform-origin: bottom;
-  transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, transform 0.4s ease;
-}
-
-/*---homescreen---*/
-.homescreen {
-  position: relative;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-}
-
-.taskbar {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: calc(100vh - 6rem);
-  bottom: 1.5rem;
-  width: clamp(18rem, 40vw, 28rem);
-  height: 4.5rem;
-  background-color: #b1b1b18c;
-  border-radius: 1rem;
-  box-sizing: border-box;
-}
+/*---shared---*/
 
 .folder.docked {
   top: calc(100% - 5.4rem);
@@ -194,6 +59,154 @@ img {
   width: 0.9rem;
   transform: perspective(120px) rotateX(-30deg);
 }
+
+.placeholder1, .placeholder2, .placeholder3 {
+  position: absolute;
+  z-index: 2; /* between folder-body1 (z-index:1) and folder-body2 */
+}
+
+.placeholder1 { top: -25%; height: 50%; left: 10%; transform: rotate(-15deg); width: 35%; }
+.placeholder2 { top: -40%; height: 60%; left: 30%; transform: rotate(5deg); width: 35%; }
+.placeholder3 { top: -20%; height: 60%; left: 50%; transform: rotate(20deg); width: 35%; }
+
+
+/*---lockscreen---*/
+.lockscreen {
+  position: relative;
+  height: 100dvh;
+  margin: 0;
+  padding: clamp(3rem, 5vw, 4rem);
+  box-sizing: border-box;
+  text-align: center;
+  color: #6E7378;
+  transition: opacity 0.6s ease;
+}
+
+.time {
+  font-size: clamp(6rem, 19vw, 7rem);
+  font-weight: 500;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.date {
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  font-weight: 500;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.name {
+  position: absolute;
+  bottom: clamp(3rem, 7vw, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  font-weight: 500;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.lockscreen.unlocking {
+  opacity: 0;
+}
+
+/*---shared folder---*/
+.folder {
+  position: fixed;
+  z-index: 6; /* ADD THIS — makes #file's whole stacking context outrank the flying cards */
+  top: 50%;
+  left: 50%;
+  width: clamp(1.25rem, 70vw, 15.625rem);
+  height: clamp(1rem, 56vw, 12.5rem);
+  transform: translate(-50%, -50%);
+  transition: top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease;
+  container-type: inline-size;
+}
+
+.folder-tab {
+  position: relative;
+  width: 40%;
+  height: 6%;
+  background-color: #B9B9B9;
+  margin-bottom: -1%;
+  border-radius: 0.75rem 0.75rem 0 0;
+  transition: height 0.4s ease, margin-bottom 0.4s ease, border-radius 0.4s ease;
+}
+
+.folder-body {
+  position: relative;
+  width: 100%;
+  height: 25%;
+  background-color: #B9B9B9;
+  border-radius: 0 0.75rem 0 0;
+  transition: height 0.4s ease, border-radius 0.4s ease;
+}
+
+.folder-body1 {
+  position: absolute;
+  display: flex;
+  left: 5%;
+  justify-content: center;
+  align-items: center;
+  top: 8%;
+  width: 90%;
+  height: 30%;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  z-index: 1;
+  transition: height 0.4s ease, border-radius 0.4s ease;
+}
+
+.folder-body2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 13%;
+  left: 0;
+  width: 100%;
+  height: 83%;
+  background-color: #DBDBDB;
+  border-radius: 0.75rem;
+  z-index: 3;
+  font-family: "Palanquin Dark", sans-serif;
+  color: #A4A4A4;
+  font-size: 45cqw;
+  font-weight: 500;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease, border-radius 0.4s ease, clip-path 0.4s ease;
+}
+
+img {
+  position: absolute;
+  left: 0.3rem;
+  top: 2.8rem;
+  width: 2.8rem;
+  z-index: 3;
+  transform: perspective(120px) rotateX(0deg);
+  transform-origin: bottom;
+  transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, transform 0.4s ease;
+}
+
+/*---homescreen---*/
+.homescreen {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.taskbar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(100vh - 6rem);
+  bottom: 1.5rem;
+  width: clamp(18rem, 40vw, 28rem);
+  height: 4.5rem;
+  background-color: #b1b1b18c;
+  border-radius: 1rem;
+  box-sizing: border-box;
+}
+
 
 .whole-folder {
   display: flex;
