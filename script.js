@@ -34,9 +34,9 @@ const originalCardConfig = {
 
 // homescreen corner targets, in viewport units (independent of #file entirely)
 const cardEndTargets = {
-  card1: { topVh: 8,  leftVw: 8,  widthRem: 4.5, heightRem: 5.5, rotate: 0 },
-  card2: { topVh: 32, leftVw: 8,  widthRem: 3.5, heightRem: 3.5, rotate: 0 },
-  card3: { topVh: 8,  leftVw: 85, widthRem: 3.5, heightRem: 4.5, rotate: 0 },
+  card1: { topVh: 8,  leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
+  card2: { topVh: 32, leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
+  card3: { topVh: 8,  leftVw: 75, widthRem: 8, heightRem: 7, rotate: 0 },
 };
 
 /*---math helpers---*/
