@@ -63,6 +63,7 @@ body {
 .placeholder1, .placeholder2, .placeholder3 {
   position: absolute;
   z-index: 2;
+  opacity: 0
 }
 
 .placeholder1 { top: -25%; height: 50%; left: 10%; transform: rotate(-15deg); width: 35%; }
@@ -216,6 +217,7 @@ img {
   transform: translate(-50%);
   width: clamp(18rem, 40vw, 28rem);
   height: 10%;
+  z-index: 10;
 }
 
 .todo {
@@ -227,6 +229,7 @@ img {
   width: clamp(18rem, 40vw, 28rem);
   height: 40%;
   border-radius: 1rem;
+  z-index: 10;
 }
 
 .folder-icon {
@@ -276,14 +279,80 @@ img {
   top: 0.8rem;
 }
 
-/*---side squares (card landing targets)---*/
-.side-square {
-  position: absolute;
-  background-color: #78776e;
-  width: 3.2rem;
-  height: 3.2rem;
+/*---info---*/
+.info-wrapper {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+  max-width: 70rem;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.side-square-1 { top: 0; left: calc(50% - clamp(9rem, 20vw, 14rem) - 4rem); }
-.side-square-2 { top: 5rem; left: calc(50% - clamp(9rem, 20vw, 14rem) - 4rem); }
-.side-square-3 { top: 0; right: calc(50% - clamp(9rem, 20vw, 14rem) - 4rem); }
+.info-about{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+}
+
+.info-header{
+  position: fixed;
+  width: 100%;
+  height: 7%;
+  background-color: #DCDCDC;
+  border-radius: 1.5rem 1.5rem 0rem 0rem;
+}
+
+.divider {
+  position: relative;
+  top: 60%;
+  /* left: 0%; */
+  width: 50%;
+  max-width: 25rem;
+  height: 1px;
+  background-color: #B4B2A9;
+  /* margin: 1rem 0; */
+}
+
+.divider1 {
+  position: relative;
+  top: 7%;
+  left: min(50%, 25rem);
+  height: 53%;
+  width: 1px;
+  background-color: #B4B2A9;
+  /* margin: 1rem 0; */
+}
+
+.close {
+  position: absolute;
+  top: 2%;
+  left: 2.5%;
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close:hover{
+  transform: scale(1.1);
+}
+
+.info-name{
+  position: absolute;
+  top: 10%;
+  left: calc((100% + min(50%, 25rem)) / 2);
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1rem;
+  color: #444441;
+}

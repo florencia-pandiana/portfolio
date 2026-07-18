@@ -25,18 +25,18 @@ const card2 = document.getElementById('card2');
 const card3 = document.getElementById('card3');
 const cards = [card1, card2, card3];
 
-// original lockscreen fan position, as % of #file's own box (matches your original CSS)
+// original lockscreen fan position, as % of #file's own box
 const originalCardConfig = {
   card1: { top: -25, height: 50, left: 10, width: 35, rotate: -15 },
   card2: { top: -40, height: 60, left: 30, width: 35, rotate: 5 },
   card3: { top: -20, height: 60, left: 50, width: 35, rotate: 20 },
 };
 
-// homescreen corner targets, in viewport units (independent of #file entirely)
+// homescreen corner targets, in viewport units
 const cardEndTargets = {
-  card1: { topVh: 8,  leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
-  card2: { topVh: 32, leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
-  card3: { topVh: 8,  leftVw: 75, widthRem: 8, heightRem: 7, rotate: 0 },
+  card1: { topVh: 8,  leftVw: 6,  widthVw: 20, heightVw: 20, rotate: 0, minLeft: 1.5, minTop: 5.5 },
+  card2: { topVh: 50, leftVw: 6,  widthVw: 20, heightVw: 20, rotate: 0, minLeft: 1.5, minTop: 21 },
+  card3: { topVh: 8,  leftVw: 65, widthVw: 20, heightVw: 20, rotate: 0, maxLeft: 24.5, minTop: 5.5 },
 };
 
 /*---math helpers---*/
@@ -53,7 +53,7 @@ function clampPx(minRem, vwPercent, maxRem) {
   return Math.min(Math.max(preferredPx, minPx), maxPx);
 }
 
-// #file's undocked (lockscreen) size/position, calculated directly — no need to touch its transition
+// #file's undocked (lockscreen) size/position, calculated directly
 function getFolderUndockedRect() {
   const width = clampPx(1.25, 70, 15.625);
   const height = clampPx(1, 56, 12.5);
@@ -76,10 +76,6 @@ function easeInOutQuad(t) {
 }
 
 /*---core animation loop---*/
-/* Runs every frame for the full duration, converting a live absolute-pixel target
-   into %-of-#file's-current-box — so the card stays a real DOM child of #file
-   (permanently sandwiched, correct z-index) while still visually flying in a
-   straight line to a fixed screen position. */
 
 function animateCardFlight(card, startPx, startRotate, endPx, endRotate, duration, onComplete) {
   card.style.transition = 'none';
@@ -96,7 +92,7 @@ function animateCardFlight(card, startPx, startRotate, endPx, endRotate, duratio
     const curHeight = startPx.height + (endPx.height - startPx.height) * eased;
     const curRotate = startRotate + (endRotate - startRotate) * eased;
 
-    const folderRectNow = folder.getBoundingClientRect(); // #file's LIVE position this exact frame
+    const folderRectNow = folder.getBoundingClientRect();
 
     const leftPct = (curLeft - folderRectNow.left) / folderRectNow.width * 100;
     const topPct = (curTop - folderRectNow.top) / folderRectNow.height * 100;
@@ -122,18 +118,16 @@ function animateCardFlight(card, startPx, startRotate, endPx, endRotate, duratio
 /*---trigger functions---*/
 
 function flyCardsToHomescreen() {
-  const rootPx = getRootFontSizePx();
-
   cards.forEach(card => {
-    const startRect = card.getBoundingClientRect(); // current fanned position
+    const startRect = card.getBoundingClientRect();
     const startRotate = originalCardConfig[card.id].rotate;
 
     const target = cardEndTargets[card.id];
     const endRect = {
-      left: (window.innerWidth * target.leftVw / 100),
-      top: (window.innerHeight * target.topVh / 100),
-      width: target.widthRem * rootPx,
-      height: target.heightRem * rootPx,
+      left: window.innerWidth * target.leftVw / 100,
+      top: window.innerHeight * target.topVh / 100,
+      width: window.innerWidth * target.widthVw / 100,
+      height: window.innerWidth * target.heightVw / 100,
     };
 
     animateCardFlight(card, startRect, startRotate, endRect, target.rotate, 400);
@@ -144,14 +138,14 @@ function flyCardsBackToFolder() {
   const folderUndockedRect = getFolderUndockedRect();
 
   cards.forEach(card => {
-    const startRect = card.getBoundingClientRect(); // current corner position
+    const startRect = card.getBoundingClientRect();
     const startRotate = cardEndTargets[card.id].rotate;
 
     const config = originalCardConfig[card.id];
     const endRect = configToPx(config, folderUndockedRect);
 
     animateCardFlight(card, startRect, startRotate, endRect, config.rotate, 400, () => {
-      card.removeAttribute('style'); // hand control back to the original .placeholder1/2/3 CSS
+      card.removeAttribute('style');
     });
   });
 }
@@ -187,4 +181,99 @@ folder.addEventListener('click', (e) => {
       homescreen.style.display = 'none';
     }, 400);
   }
+});
+
+function repositionCardsInstantly() {
+  const isLocked = homescreen.style.display === 'none';
+  if (isLocked) return; // only reposition when actually on homescreen
+
+  cards.forEach(card => {
+    const target = cardEndTargets[card.id];
+    const endRect = {
+      left: window.innerWidth * target.leftVw / 100,
+      top: window.innerHeight * target.topVh / 100,
+      width: window.innerWidth * target.widthVw / 100,
+      height: window.innerWidth * target.heightVw / 100,
+    };
+
+    const folderRectNow = folder.getBoundingClientRect();
+
+    const leftPct = (endRect.left - folderRectNow.left) / folderRectNow.width * 100;
+    const topPct = (endRect.top - folderRectNow.top) / folderRectNow.height * 100;
+    const widthPct = endRect.width / folderRectNow.width * 100;
+    const heightPct = endRect.height / folderRectNow.height * 100;
+
+    card.style.transition = 'none';
+    card.style.left = leftPct + '%';
+    card.style.top = topPct + '%';
+    card.style.width = widthPct + '%';
+    card.style.height = heightPct + '%';
+  });
+}
+
+window.addEventListener('resize', repositionCardsInstantly);
+
+/*---unlocking about me---*/
+
+document.addEventListener('click', (e) => {
+  const isLocked = homescreen.style.display === 'none';
+
+  if (isLocked) {
+    lockscreen.classList.add('unlocking');
+    folder.classList.add('docked');
+    flyCardsToHomescreen();
+    setTimeout(() => {
+      lockscreen.style.display = 'none';
+      homescreen.style.display = 'block';
+    }, 400);
+  }
+});
+
+/*---locking screen---*/
+
+folder.addEventListener('click', (e) => {
+  const isLocked = homescreen.style.display === 'none';
+
+  if (!isLocked) {
+    e.stopPropagation();
+    lockscreen.classList.remove('unlocking');
+    folder.classList.remove('docked');
+    lockscreen.style.display = 'block';
+    flyCardsBackToFolder();
+    setTimeout(() => {
+      homescreen.style.display = 'none';
+    }, 400);
+  }
+});
+
+const infoWrapper = document.getElementById('infoWrapper');
+const infoPanels = document.querySelectorAll('.info');
+
+function openInfo(panelId) {
+  infoPanels.forEach(panel => panel.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+  infoWrapper.style.display = 'flex';
+}
+
+function closeInfo() {
+  infoWrapper.style.display = 'none';
+}
+
+folder1.addEventListener('click', (e) => {
+  e.stopPropagation();
+  openInfo('infoAbout');
+});
+
+folder2.addEventListener('click', (e) => {
+  e.stopPropagation();
+  openInfo('infoProjects');
+});
+
+folder3.addEventListener('click', (e) => {
+  e.stopPropagation();
+  openInfo('infoSkills');
+});
+
+document.querySelectorAll('.info-close').forEach(btn => {
+  btn.addEventListener('click', closeInfo);
 });
