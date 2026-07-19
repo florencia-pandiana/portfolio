@@ -25,18 +25,16 @@ const card2 = document.getElementById('card2');
 const card3 = document.getElementById('card3');
 const cards = [card1, card2, card3];
 
-// original lockscreen fan position, as % of #file's own box
 const originalCardConfig = {
   card1: { top: -25, height: 50, left: 10, width: 35, rotate: -15 },
   card2: { top: -40, height: 60, left: 30, width: 35, rotate: 5 },
   card3: { top: -20, height: 60, left: 50, width: 35, rotate: 20 },
 };
 
-// homescreen corner targets, in viewport units
 const cardEndTargets = {
-  card1: { topVh: 8,  leftVw: 6,  widthVw: 20, heightVw: 20, rotate: 0, minLeft: 1.5, minTop: 5.5 },
-  card2: { topVh: 50, leftVw: 6,  widthVw: 20, heightVw: 20, rotate: 0, minLeft: 1.5, minTop: 21 },
-  card3: { topVh: 8,  leftVw: 65, widthVw: 20, heightVw: 20, rotate: 0, maxLeft: 24.5, minTop: 5.5 },
+  card1: { topVh: 8,  leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
+  card2: { topVh: 32, leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
+  card3: { topVh: 8,  leftVw: 75, widthRem: 8, heightRem: 7, rotate: 0 },
 };
 
 /*---math helpers---*/
@@ -53,7 +51,6 @@ function clampPx(minRem, vwPercent, maxRem) {
   return Math.min(Math.max(preferredPx, minPx), maxPx);
 }
 
-// #file's undocked (lockscreen) size/position, calculated directly
 function getFolderUndockedRect() {
   const width = clampPx(1.25, 70, 15.625);
   const height = clampPx(1, 56, 12.5);
@@ -118,16 +115,18 @@ function animateCardFlight(card, startPx, startRotate, endPx, endRotate, duratio
 /*---trigger functions---*/
 
 function flyCardsToHomescreen() {
+  const rootPx = getRootFontSizePx();
+
   cards.forEach(card => {
     const startRect = card.getBoundingClientRect();
     const startRotate = originalCardConfig[card.id].rotate;
 
     const target = cardEndTargets[card.id];
     const endRect = {
-      left: window.innerWidth * target.leftVw / 100,
-      top: window.innerHeight * target.topVh / 100,
-      width: window.innerWidth * target.widthVw / 100,
-      height: window.innerWidth * target.heightVw / 100,
+      left: (window.innerWidth * target.leftVw / 100),
+      top: (window.innerHeight * target.topVh / 100),
+      width: target.widthRem * rootPx,
+      height: target.heightRem * rootPx,
     };
 
     animateCardFlight(card, startRect, startRotate, endRect, target.rotate, 400);
@@ -183,94 +182,11 @@ folder.addEventListener('click', (e) => {
   }
 });
 
-<<<<<<< Updated upstream
-function repositionCardsInstantly() {
-  const isLocked = homescreen.style.display === 'none';
-  if (isLocked) return; // only reposition when actually on homescreen
-
-  cards.forEach(card => {
-    const target = cardEndTargets[card.id];
-    const endRect = {
-      left: window.innerWidth * target.leftVw / 100,
-      top: window.innerHeight * target.topVh / 100,
-      width: window.innerWidth * target.widthVw / 100,
-      height: window.innerWidth * target.heightVw / 100,
-    };
-
-    const folderRectNow = folder.getBoundingClientRect();
-
-    const leftPct = (endRect.left - folderRectNow.left) / folderRectNow.width * 100;
-    const topPct = (endRect.top - folderRectNow.top) / folderRectNow.height * 100;
-    const widthPct = endRect.width / folderRectNow.width * 100;
-    const heightPct = endRect.height / folderRectNow.height * 100;
-
-    card.style.transition = 'none';
-    card.style.left = leftPct + '%';
-    card.style.top = topPct + '%';
-    card.style.width = widthPct + '%';
-    card.style.height = heightPct + '%';
-  });
-}
-
-window.addEventListener('resize', repositionCardsInstantly);
-
-/*---unlocking about me---*/
-
-document.addEventListener('click', (e) => {
-  const isLocked = homescreen.style.display === 'none';
-
-  if (isLocked) {
-    lockscreen.classList.add('unlocking');
-    folder.classList.add('docked');
-    flyCardsToHomescreen();
-    setTimeout(() => {
-      lockscreen.style.display = 'none';
-      homescreen.style.display = 'block';
-    }, 400);
-  }
-});
-
-/*---locking screen---*/
-
-folder.addEventListener('click', (e) => {
-  const isLocked = homescreen.style.display === 'none';
-
-  if (!isLocked) {
-    e.stopPropagation();
-    lockscreen.classList.remove('unlocking');
-    folder.classList.remove('docked');
-    lockscreen.style.display = 'block';
-    flyCardsBackToFolder();
-    setTimeout(() => {
-      homescreen.style.display = 'none';
-    }, 400);
-  }
-});
-
-const infoWrapper = document.getElementById('infoWrapper');
-const infoPanels = document.querySelectorAll('.info');
-
-function openInfo(panelId) {
-  infoPanels.forEach(panel => panel.classList.remove('active'));
-  document.getElementById(panelId).classList.add('active');
-  infoWrapper.style.display = 'flex';
-}
-
-function closeInfo() {
-  infoWrapper.style.display = 'none';
-}
-
-folder1.addEventListener('click', (e) => {
-  e.stopPropagation();
-  openInfo('infoAbout');
-=======
-/*---about me info panel---*/
+/*---about me + projects info panels---*/
 
 const folder1 = document.getElementById('folder1');
 const infoWrapperAbout = document.getElementById('infoWrapperAbout');
 const closeAbout = document.getElementById('closeAbout');
-
-/*---projects info panel---*/
 
 const folder2 = document.getElementById('folder2');
 const infoWrapperProject = document.getElementById('infoWrapperProject');
@@ -282,7 +198,6 @@ folder1.addEventListener('click', (e) => {
   const isOpen = folder1.classList.contains('opened');
 
   if (!isOpen) {
-    // close folder2's panel first if it's open
     if (folder2.classList.contains('opened')) {
       infoWrapperProject.style.display = 'none';
       folder2.classList.remove('opened');
@@ -302,28 +217,14 @@ closeAbout.addEventListener('click', (e) => {
   e.stopPropagation();
   infoWrapperAbout.style.display = 'none';
   folder1.classList.remove('opened');
->>>>>>> Stashed changes
 });
 
 folder2.addEventListener('click', (e) => {
   e.stopPropagation();
-<<<<<<< Updated upstream
-  openInfo('infoProjects');
-});
-
-folder3.addEventListener('click', (e) => {
-  e.stopPropagation();
-  openInfo('infoSkills');
-});
-
-document.querySelectorAll('.info-close').forEach(btn => {
-  btn.addEventListener('click', closeInfo);
-=======
 
   const isOpen = folder2.classList.contains('opened');
 
   if (!isOpen) {
-    // close folder1's panel first if it's open
     if (folder1.classList.contains('opened')) {
       infoWrapperAbout.style.display = 'none';
       folder1.classList.remove('opened');
@@ -343,5 +244,4 @@ closeProject.addEventListener('click', (e) => {
   e.stopPropagation();
   infoWrapperProject.style.display = 'none';
   folder2.classList.remove('opened');
->>>>>>> Stashed changes
 });

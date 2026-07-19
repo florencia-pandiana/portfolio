@@ -63,7 +63,7 @@ body {
 .placeholder1, .placeholder2, .placeholder3 {
   position: absolute;
   z-index: 2;
-  opacity: 0
+  opacity: 0.6;
 }
 
 .placeholder1 { top: -25%; height: 50%; left: 10%; transform: rotate(-15deg); width: 35%; }
@@ -217,7 +217,6 @@ img {
   transform: translate(-50%);
   width: clamp(18rem, 40vw, 28rem);
   height: 10%;
-  z-index: 10;
 }
 
 .todo {
@@ -279,7 +278,60 @@ img {
   top: 0.8rem;
 }
 
-/*---info---*/
+/*---mini folder "opened" morph (About me / Projects click) ---*/
+
+.whole-folder .folder,
+.whole-folder .folder-tab,
+.whole-folder .folder-body,
+.whole-folder .folder-body1,
+.whole-folder .folder-body2,
+.whole-folder img {
+  transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease, margin-bottom 0.4s ease, border-radius 0.4s ease, clip-path 0.4s ease, transform 0.4s ease;
+}
+
+.whole-folder .folder.opened {
+  width: 5.5rem;
+  height: 4.4rem;
+}
+
+.whole-folder .folder.opened .folder-tab {
+  height: 0.38rem;
+  margin-bottom: -0.1rem;
+  border-radius: 0.2rem 0.2rem 0 0;
+}
+
+.whole-folder .folder.opened .folder-body {
+  height: 3.15rem;
+  border-radius: 0 0.35rem;
+}
+
+.whole-folder .folder.opened .folder-body1 {
+  height: 0rem;
+  border-radius: 0 0.35rem;
+}
+
+.whole-folder .folder.opened .folder-body2 {
+  top: 0.88rem;
+  left: -8%;
+  width: 116%;
+  height: 3.15rem;
+  border-radius: 0.35rem;
+  clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 7% 100%);
+}
+
+.whole-folder .folder.opened .folder-body2 span {
+  transform: perspective(120px) rotateX(-30deg);
+}
+
+.whole-folder .folder.opened img {
+  top: 1.13rem;
+  left: -0.19rem;
+  width: 1.13rem;
+  transform: perspective(120px) rotateX(-30deg);
+}
+
+/*---info modals (shared wrapper styling)---*/
+
 .info-wrapper {
   position: fixed;
   top: 55%;
@@ -295,43 +347,6 @@ img {
   justify-content: center;
 }
 
-.info-about{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #FFFFFF;
-  border-radius: 1.5rem;
-}
-
-.info-header{
-  position: fixed;
-  width: 100%;
-  height: 7%;
-  background-color: #DCDCDC;
-  border-radius: 1.5rem 1.5rem 0rem 0rem;
-}
-
-.divider {
-  position: relative;
-  top: 60%;
-  /* left: 0%; */
-  width: 50%;
-  max-width: 25rem;
-  height: 1px;
-  background-color: #B4B2A9;
-  /* margin: 1rem 0; */
-}
-
-.divider1 {
-  position: relative;
-  top: 7%;
-  left: min(50%, 25rem);
-  height: 53%;
-  width: 1px;
-  background-color: #B4B2A9;
-  /* margin: 1rem 0; */
-}
-
 .close {
   position: absolute;
   top: 2%;
@@ -343,11 +358,47 @@ img {
   cursor: pointer;
 }
 
-.close:hover{
+.close:hover {
   transform: scale(1.1);
 }
 
-.info-name{
+.info-header {
+  position: relative;
+  width: 100%;
+  height: 7%;
+  background-color: #DCDCDC;
+  border-radius: 1.5rem 1.5rem 0rem 0rem;
+}
+
+/*---about me panel---*/
+
+.info-about {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+}
+
+.divider {
+  position: relative;
+  top: 60%;
+  width: 50%;
+  max-width: 25rem;
+  height: 1px;
+  background-color: #B4B2A9;
+}
+
+.divider1 {
+  position: relative;
+  top: 7%;
+  left: min(50%, 25rem);
+  height: 53%;
+  width: 1px;
+  background-color: #B4B2A9;
+}
+
+.info-name {
   position: absolute;
   top: 10%;
   left: calc((100% + min(50%, 25rem)) / 2);
@@ -355,4 +406,60 @@ img {
   margin: 0;
   font-size: 1rem;
   color: #444441;
+}
+
+/*---projects panel---*/
+
+.info-project {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+}
+
+.divider-project {
+  position: absolute;
+  top: 7%;
+  left: min(65%, 45rem);
+  height: 93%;
+  width: 1px;
+  background-color: #B4B2A9;
+}
+
+.divider-project2 {
+  position: absolute;
+  top: 7%;
+  left: min(20%, 10rem);
+  height: 93%;
+  width: 1px;
+  background-color: #B4B2A9;
+}
+
+.list-of-proj {
+  position: absolute;
+  left: 3%;
+  width: calc(min(20%, 10rem) - 3% - 1rem);
+  height: 85%;
+  background-color: #DCDCDC;
+  opacity: 35%;
+  top: 10%;
+  border-radius: 0.6rem;
+}
+
+.info-skills{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+}
+
+.divider-skills {
+  position: absolute;
+  top: 7%;
+  left: min(30%, 20rem);
+  height: 93%;
+  width: 1px;
+  background-color: #B4B2A9;
 }
