@@ -183,6 +183,7 @@ folder.addEventListener('click', (e) => {
   }
 });
 
+<<<<<<< Updated upstream
 function repositionCardsInstantly() {
   const isLocked = homescreen.style.display === 'none';
   if (isLocked) return; // only reposition when actually on homescreen
@@ -262,10 +263,51 @@ function closeInfo() {
 folder1.addEventListener('click', (e) => {
   e.stopPropagation();
   openInfo('infoAbout');
+=======
+/*---about me info panel---*/
+
+const folder1 = document.getElementById('folder1');
+const infoWrapperAbout = document.getElementById('infoWrapperAbout');
+const closeAbout = document.getElementById('closeAbout');
+
+/*---projects info panel---*/
+
+const folder2 = document.getElementById('folder2');
+const infoWrapperProject = document.getElementById('infoWrapperProject');
+const closeProject = document.getElementById('closeProject');
+
+folder1.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  const isOpen = folder1.classList.contains('opened');
+
+  if (!isOpen) {
+    // close folder2's panel first if it's open
+    if (folder2.classList.contains('opened')) {
+      infoWrapperProject.style.display = 'none';
+      folder2.classList.remove('opened');
+    }
+
+    folder1.classList.add('opened');
+    setTimeout(() => {
+      infoWrapperAbout.style.display = 'flex';
+    }, 400);
+  } else {
+    infoWrapperAbout.style.display = 'none';
+    folder1.classList.remove('opened');
+  }
+});
+
+closeAbout.addEventListener('click', (e) => {
+  e.stopPropagation();
+  infoWrapperAbout.style.display = 'none';
+  folder1.classList.remove('opened');
+>>>>>>> Stashed changes
 });
 
 folder2.addEventListener('click', (e) => {
   e.stopPropagation();
+<<<<<<< Updated upstream
   openInfo('infoProjects');
 });
 
@@ -276,4 +318,30 @@ folder3.addEventListener('click', (e) => {
 
 document.querySelectorAll('.info-close').forEach(btn => {
   btn.addEventListener('click', closeInfo);
+=======
+
+  const isOpen = folder2.classList.contains('opened');
+
+  if (!isOpen) {
+    // close folder1's panel first if it's open
+    if (folder1.classList.contains('opened')) {
+      infoWrapperAbout.style.display = 'none';
+      folder1.classList.remove('opened');
+    }
+
+    folder2.classList.add('opened');
+    setTimeout(() => {
+      infoWrapperProject.style.display = 'flex';
+    }, 400);
+  } else {
+    infoWrapperProject.style.display = 'none';
+    folder2.classList.remove('opened');
+  }
+});
+
+closeProject.addEventListener('click', (e) => {
+  e.stopPropagation();
+  infoWrapperProject.style.display = 'none';
+  folder2.classList.remove('opened');
+>>>>>>> Stashed changes
 });
