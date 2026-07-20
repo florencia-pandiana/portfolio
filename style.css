@@ -217,6 +217,7 @@ img {
   transform: translate(-50%);
   width: clamp(18rem, 40vw, 28rem);
   height: 10%;
+  cursor: pointer;
 }
 
 .todo {
@@ -334,12 +335,12 @@ img {
 
 .info-wrapper {
   position: fixed;
-  top: 55%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 60%;
   height: 60%;
-  max-width: 70rem;
+  max-width: 60rem;
   background-color: rgba(0, 0, 0, 0);
   z-index: 100;
   display: flex;
@@ -447,7 +448,9 @@ img {
   border-radius: 0.6rem;
 }
 
-.info-skills{
+/*---skills panel---*/
+
+.info-skills {
   position: relative;
   width: 100%;
   height: 100%;
@@ -458,8 +461,104 @@ img {
 .divider-skills {
   position: absolute;
   top: 7%;
-  left: min(30%, 20rem);
+  left: min(20%, 10rem);
   height: 93%;
   width: 1px;
   background-color: #B4B2A9;
+}
+
+.list-of-skills {
+  position: absolute;
+  left: 3%;
+  width: calc(min(20%, 10rem) - 3% - 1rem);
+  height: 85%;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 0.5rem 0;
+}
+
+.skill-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  color: #6E7378;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.list-of-skills .folder,
+.list-of-skills .folder-tab,
+.list-of-skills .folder-body,
+.list-of-skills .folder-body1,
+.list-of-skills .folder-body2,
+.list-of-skills img {
+  transition: background-color 0.2s ease;
+}
+
+.list-of-skills .folder {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 3.5rem;
+  height: 2.8rem;
+}
+
+.list-of-skills .folder-tab {
+  height: 0.15rem;
+}
+
+.list-of-skills .folder-body {
+  height: 2rem;
+  border-radius: 0 0.25rem 0.25rem 0.25rem;
+}
+
+.list-of-skills .folder-body1 {
+  top: 0.25rem;
+  height: 1.65rem;
+  border-radius: 0.25rem;
+}
+
+.list-of-skills .folder-body2 {
+  top: 0.4rem;
+  height: 1.9rem;
+  font-size: 0.9rem;
+}
+
+.list-of-skills img {
+  width: 0.7rem;
+  top: 0.5rem;
+}
+
+.skill-icon.selected .folder-body,
+.skill-icon.selected .folder-body1 {
+  background-color: #C4C2B8;
+}
+
+.skill-content {
+  position: absolute;
+  left: calc(min(20%, 10rem) + 2rem);
+  top: 10%;
+  right: 3%;
+  height: 85%;
+}
+
+.skill-content-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: #444441;
+}
+
+.skill-content-box {
+  width: 100%;
+  height: calc(100% - 2.5rem);
+  background-color: #DCDCDC;
+  border-radius: 0.6rem;
 }

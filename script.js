@@ -182,66 +182,64 @@ folder.addEventListener('click', (e) => {
   }
 });
 
-/*---about me + projects info panels---*/
+/*---reusable folder toggle system (About/Projects/Skills)---*/
 
-const folder1 = document.getElementById('folder1');
-const infoWrapperAbout = document.getElementById('infoWrapperAbout');
-const closeAbout = document.getElementById('closeAbout');
+const allToggles = [];
 
-const folder2 = document.getElementById('folder2');
-const infoWrapperProject = document.getElementById('infoWrapperProject');
-const closeProject = document.getElementById('closeProject');
+function registerFolderToggle(folderId, wrapperId, closeId) {
+  const folderEl = document.getElementById(folderId);
+  const wrapperEl = document.getElementById(wrapperId);
+  const closeEl = document.getElementById(closeId);
 
-folder1.addEventListener('click', (e) => {
-  e.stopPropagation();
+  const entry = { folderEl, wrapperEl };
+  allToggles.push(entry);
 
-  const isOpen = folder1.classList.contains('opened');
+  folderEl.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-  if (!isOpen) {
-    if (folder2.classList.contains('opened')) {
-      infoWrapperProject.style.display = 'none';
-      folder2.classList.remove('opened');
+    const isOpen = folderEl.classList.contains('opened');
+
+    if (!isOpen) {
+      allToggles.forEach(other => {
+        if (other.folderEl !== folderEl && other.folderEl.classList.contains('opened')) {
+          other.wrapperEl.style.display = 'none';
+          other.folderEl.classList.remove('opened');
+        }
+      });
+
+      folderEl.classList.add('opened');
+      setTimeout(() => {
+        wrapperEl.style.display = 'flex';
+      }, 400);
+    } else {
+      wrapperEl.style.display = 'none';
+      folderEl.classList.remove('opened');
     }
+  });
 
-    folder1.classList.add('opened');
-    setTimeout(() => {
-      infoWrapperAbout.style.display = 'flex';
-    }, 400);
-  } else {
-    infoWrapperAbout.style.display = 'none';
-    folder1.classList.remove('opened');
-  }
-});
+  closeEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    wrapperEl.style.display = 'none';
+    folderEl.classList.remove('opened');
+  });
+}
 
-closeAbout.addEventListener('click', (e) => {
-  e.stopPropagation();
-  infoWrapperAbout.style.display = 'none';
-  folder1.classList.remove('opened');
-});
+registerFolderToggle('folder1', 'infoWrapperAbout', 'closeAbout');
+registerFolderToggle('folder2', 'infoWrapperProject', 'closeProject');
+registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 
-folder2.addEventListener('click', (e) => {
-  e.stopPropagation();
+/*---skills panel: click a skill to update the content area---*/
 
-  const isOpen = folder2.classList.contains('opened');
+const skillIcons = document.querySelectorAll('.skill-icon');
+const skillContentTitle = document.getElementById('skillContentTitle');
 
-  if (!isOpen) {
-    if (folder1.classList.contains('opened')) {
-      infoWrapperAbout.style.display = 'none';
-      folder1.classList.remove('opened');
-    }
+skillIcons.forEach(icon => {
+  icon.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-    folder2.classList.add('opened');
-    setTimeout(() => {
-      infoWrapperProject.style.display = 'flex';
-    }, 400);
-  } else {
-    infoWrapperProject.style.display = 'none';
-    folder2.classList.remove('opened');
-  }
-});
+    skillIcons.forEach(i => i.classList.remove('selected'));
+    icon.classList.add('selected');
 
-closeProject.addEventListener('click', (e) => {
-  e.stopPropagation();
-  infoWrapperProject.style.display = 'none';
-  folder2.classList.remove('opened');
+    skillContentTitle.textContent = icon.dataset.skill;
+  });
 });
