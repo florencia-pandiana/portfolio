@@ -415,14 +415,14 @@ img {
 
 .info-name {
   margin: 0;
-  font-size: clamp(1rem, 2.5vh, 2rem);
+  font-size: clamp(1rem, 2.2vh + 0.3vw, 1.6rem);
   color: #444441;
   text-align: center;
 }
 
 .info-intro {
   margin: 1.5rem 0 0;
-  font-size: clamp(0.7rem, 1.4vh, 1.2rem);
+  font-size: clamp(0.7rem, 1.3vh + 0.2vw, 1.1rem);
   line-height: 1.5;
   color: #5F5E5A;
 }
@@ -490,11 +490,11 @@ img {
 }
 
 .list-of-skills {
-  position: relative;
-  left: 3%;
-  width: calc(min(20%, 10rem) - 3% - 1rem);
-  height: 85%;
-  top: max(7%, 2.7rem);
+  position: absolute;
+  left: 1%;
+  right: calc(100% - min(20%, 10rem) + 1%);
+  top: calc(max(7%, 2.7rem) + 1rem);
+  bottom: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -546,6 +546,7 @@ img {
   top: 0.4rem;
   height: 1.9rem;
   font-size: 0.9rem;
+  border-radius: 0.25rem;
 }
 
 .list-of-skills img {
@@ -627,8 +628,8 @@ img {
 
 .proj-list {
   position: absolute;
-  left: 3%;
-  width: calc(min(20%, 10rem) - 3% - 1rem);
+  left: 1%;
+  right: calc(100% - min(20%, 10rem) + 1%);
   top: calc(max(7%, 2.7rem) + 1rem);
   bottom: 5%;
   display: flex;
