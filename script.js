@@ -233,13 +233,39 @@ registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 const skillIcons = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 
+function resetSkillsPanel() {
+  skillIcons.forEach(i => i.classList.remove('selected'));
+  skillContentTitle.textContent = 'Select a skill';
+}
+
 skillIcons.forEach(icon => {
   icon.addEventListener('click', (e) => {
     e.stopPropagation();
 
-    skillIcons.forEach(i => i.classList.remove('selected'));
-    icon.classList.add('selected');
+    const folderEl = icon.querySelector('.folder');
+    const alreadySelected = icon.classList.contains('selected');
 
-    skillContentTitle.textContent = icon.dataset.skill;
+    skillIcons.forEach(i => {
+      i.classList.remove('selected');
+      i.querySelector('.folder').classList.remove('opened');
+    });
+
+    if (alreadySelected) {
+      skillContentTitle.textContent = 'Select a skill';
+    } else {
+      icon.classList.add('selected');
+      folderEl.classList.add('opened');
+      skillContentTitle.textContent = icon.dataset.skill;
+    }
   });
 });
+
+// reset whenever the Skills panel closes, either by clicking folder3 again or the × button
+document.getElementById('folder3').addEventListener('click', () => {
+  const isNowClosed = !document.getElementById('folder3').classList.contains('opened');
+  if (isNowClosed) {
+    resetSkillsPanel();
+  }
+});
+
+document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
