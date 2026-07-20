@@ -7,7 +7,6 @@ html, body {
 body {
   background-color: #EFEDE7;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  font-weight: 550;
 }
 
 /*---shared---*/
@@ -351,17 +350,19 @@ img {
 
 .close {
   position: absolute;
-  top: 2.5%;
+  top: calc(max(7%, 2.7rem) / 2);
+  transform: translateY(-50%);
   left: 2.5%;
   width: 1.25rem;
   height: 1.25rem;
   object-fit: contain;
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .close:hover {
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .info-header {
@@ -382,6 +383,12 @@ img {
   background-color: #FFFFFF;
   border-radius: 1.5rem;
   overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .info-about {
+    width: 90%;
+  }
 }
 
 .divider1 {
@@ -408,31 +415,18 @@ img {
 
 .info-name {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1rem, 2.5vh, 2rem);
   color: #444441;
   text-align: center;
 }
 
 .info-intro {
-  margin: 0;
-  font-size: 1.2rem;
+  margin: 1.5rem 0 0;
+  font-size: clamp(0.7rem, 1.4vh, 1.2rem);
   line-height: 1.5;
   color: #5F5E5A;
 }
 
-@media (max-width: 600px) {
-  .info-about {
-    width: 90%;
-  }
-
-  .info-name {
-    font-size: 1.3rem;
-  }
-
-  .info-intro {
-    font-size: 0.85rem;
-  }
-}
 /*---projects panel---*/
 
 .info-project {
@@ -441,22 +435,23 @@ img {
   height: 100%;
   background-color: #FFFFFF;
   border-radius: 1.5rem;
+  overflow: hidden;
 }
 
 .divider-project {
   position: absolute;
-  top: 7%;
+  top: max(7%, 2.7rem);
+  bottom: 1%;
   left: min(65%, 45rem);
-  height: 93%;
   width: 1px;
   background-color: #B4B2A9;
 }
 
 .divider-project2 {
   position: absolute;
-  top: 7%;
+  top: max(7%, 2.7rem);
+  bottom: 1%;
   left: min(20%, 10rem);
-  height: 93%;
   width: 1px;
   background-color: #B4B2A9;
 }
@@ -465,12 +460,14 @@ img {
   position: absolute;
   left: 3%;
   width: calc(min(20%, 10rem) - 3% - 1rem);
-  height: 85%;
   background-color: #DCDCDC;
   opacity: 35%;
-  top: 10%;
+  top: calc(max(7%, 2.7rem) + 1rem);
+  bottom: 3%;
   border-radius: 0.6rem;
 }
+
+
 
 /*---skills panel---*/
 
@@ -480,13 +477,14 @@ img {
   height: 100%;
   background-color: #FFFFFF;
   border-radius: 1.5rem;
+  overflow: hidden;
 }
 
 .divider-skills {
   position: absolute;
-  top: 7%;
+  top: max(7%, 2.7rem);
+  bottom: 1%;
   left: min(20%, 10rem);
-  height: 93%;
   width: 1px;
   background-color: #B4B2A9;
 }
@@ -496,7 +494,7 @@ img {
   left: 3%;
   width: calc(min(20%, 10rem) - 3% - 1rem);
   height: 85%;
-  top: 4%;
+  top: max(7%, 2.7rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -519,8 +517,6 @@ img {
   cursor: pointer;
   width: 3.9rem;
 }
-
-/*---skill folder base size (scoped to list-of-skills) ---*/
 
 .list-of-skills .folder {
   position: relative;
@@ -550,7 +546,6 @@ img {
   top: 0.4rem;
   height: 1.9rem;
   font-size: 0.9rem;
-  border-radius: 0.25rem;
 }
 
 .list-of-skills img {
@@ -628,4 +623,125 @@ img {
   height: calc(100% - 2.5rem);
   background-color: #DCDCDC;
   border-radius: 0.6rem;
+}
+
+.proj-list {
+  position: absolute;
+  left: 3%;
+  width: calc(min(20%, 10rem) - 3% - 1rem);
+  top: calc(max(7%, 2.7rem) + 1rem);
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  overflow-y: auto;
+  background-color: rgba(220, 220, 220, 0.35);
+  border-radius: 0.6rem;
+  padding: 0.75rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.proj-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #6E7378;
+  cursor: pointer;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.proj-item.selected {
+  background-color: #C4C2B8;
+}
+
+.proj-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #6E7378;
+  flex-shrink: 0;
+}
+
+.proj-gallery {
+  position: absolute;
+  left: min(20%, 10rem);
+  width: calc(min(65%, 45rem) - min(20%, 10rem) - 2rem);
+  top: calc(max(7%, 2.7rem) + 1rem);
+  bottom: 5%;
+  margin-left: 1rem;
+}
+
+.proj-gallery-img {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 3rem);
+  object-fit: cover;
+  background-color: #DCDCDC;
+  border-radius: 0.6rem;
+  top: 0;
+  left: 0;
+  transform: none;
+  transition: none;
+}
+
+.proj-gallery-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.proj-nav-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #6E7378;
+  cursor: pointer;
+  padding: 0.2rem 0.6rem;
+}
+
+.proj-thumbs {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  overflow-x: auto;
+}
+
+.proj-thumb {
+  position: relative;
+  width: 3rem;
+  height: 2.2rem;
+  object-fit: cover;
+  border-radius: 0.3rem;
+  background-color: #DCDCDC;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  transform: none;
+  transition: none;
+}
+
+.proj-detail {
+  position: absolute;
+  left: min(65%, 45rem);
+  right: 3%;
+  top: calc(max(7%, 2.7rem) + 1rem);
+  bottom: 5%;
+  margin-left: 1rem;
+  overflow-y: auto;
+}
+
+.proj-detail-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1rem, 2.2vh, 1.5rem);
+  color: #444441;
+}
+
+.proj-detail-desc {
+  margin: 0;
+  font-size: clamp(0.7rem, 1.3vh, 1rem);
+  line-height: 1.6;
+  color: #5F5E5A;
 }

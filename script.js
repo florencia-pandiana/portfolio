@@ -269,3 +269,73 @@ document.getElementById('folder3').addEventListener('click', () => {
 });
 
 document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
+
+const projItems = document.querySelectorAll('.proj-item');
+const projDetailTitle = document.getElementById('projDetailTitle');
+const projDetailDesc = document.getElementById('projDetailDesc');
+const projGalleryImg = document.getElementById('projGalleryImg');
+const projPrev = document.getElementById('projPrev');
+const projNext = document.getElementById('projNext');
+const projThumbs = document.getElementById('projThumbs');
+
+const projectData = {
+  bharabas: {
+    title: 'Bharabas Radio App Prototype',
+    desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
+    images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png'],
+  },
+  // add project2, project3, project4 the same way
+};
+
+let currentProjectId = 'bharabas';
+let currentImageIndex = 0;
+
+function renderProject(id) {
+  const data = projectData[id];
+  if (!data) return;
+
+  currentProjectId = id;
+  currentImageIndex = 0;
+
+  projDetailTitle.textContent = data.title;
+  projDetailDesc.textContent = data.desc;
+  projGalleryImg.src = data.images[0];
+
+  projThumbs.innerHTML = '';
+  data.images.forEach((src, i) => {
+    const thumb = document.createElement('img');
+    thumb.src = src;
+    thumb.className = 'proj-thumb';
+    thumb.alt = 'thumbnail';
+    thumb.addEventListener('click', () => {
+      currentImageIndex = i;
+      projGalleryImg.src = src;
+    });
+    projThumbs.appendChild(thumb);
+  });
+}
+
+projItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.stopPropagation();
+    projItems.forEach(i => i.classList.remove('selected'));
+    item.classList.add('selected');
+    renderProject(item.dataset.proj);
+  });
+});
+
+projPrev.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const images = projectData[currentProjectId].images;
+  currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+  projGalleryImg.src = images[currentImageIndex];
+});
+
+projNext.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const images = projectData[currentProjectId].images;
+  currentImageIndex = (currentImageIndex + 1) % images.length;
+  projGalleryImg.src = images[currentImageIndex];
+});
+
+renderProject('bharabas');
