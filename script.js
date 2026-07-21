@@ -272,7 +272,7 @@ document.getElementById('folder3').addEventListener('click', () => {
 
 document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
 
-/*---projects panel: list, gallery, thumbnails with highlight, feature lists---*/
+/*---projects panel: list, gallery, thumbnails with highlight, feature/tech lists---*/
 
 const projItems = document.querySelectorAll('.proj-item');
 const projDetailTitle = document.getElementById('projDetailTitle');
@@ -300,6 +300,12 @@ const projectData = {
     ],
     images: ['cashflo1.png', 'cashflo2.png'],
   },
+  processinggame: {
+    title: 'Processing Game',
+    desc: 'Developed a 2D interactive game using Processing (Java), implementing core game programming concepts such as player movement, collision detection, score tracking, game states, and object-oriented programming. The project focused on creating responsive gameplay while strengthening skills in event handling, animation, and game logic through a modular code structure.',
+    tech: ['Processing', 'Java', 'Object-Oriented Programming', 'Game Development', 'Event Handling', 'Collision Detection'],
+    images: ['processinggame1.png', 'processinggame2.png', 'processinggame3.png', 'processinggame4.png'],
+  },
 };
 
 let currentProjectId = 'bharabas';
@@ -322,9 +328,15 @@ function renderProject(id) {
   projDetailTitle.textContent = data.title;
 
   let descHTML = `<p class="proj-detail-desc-text">${data.desc}</p>`;
+
   if (data.features && data.features.length > 0) {
     const featureItems = data.features.map(f => `<li>${f}</li>`).join('');
     descHTML += `<h4 class="proj-detail-subhead">Key Features</h4><ul class="proj-detail-list">${featureItems}</ul>`;
+  }
+
+  if (data.tech && data.tech.length > 0) {
+    const techItems = data.tech.map(t => `<span class="proj-tech-tag">${t}</span>`).join('');
+    descHTML += `<h4 class="proj-detail-subhead">Tech</h4><div class="proj-tech-list">${techItems}</div>`;
   }
 
   const newDescContainer = document.createElement('div');
