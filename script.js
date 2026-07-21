@@ -234,7 +234,10 @@ const skillIcons = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 
 function resetSkillsPanel() {
-  skillIcons.forEach(i => i.classList.remove('selected'));
+  skillIcons.forEach(i => {
+    i.classList.remove('selected');
+    i.querySelector('.folder').classList.remove('opened');
+  });
   skillContentTitle.textContent = 'Select a skill';
 }
 
@@ -260,7 +263,6 @@ skillIcons.forEach(icon => {
   });
 });
 
-// reset whenever the Skills panel closes, either by clicking folder3 again or the × button
 document.getElementById('folder3').addEventListener('click', () => {
   const isNowClosed = !document.getElementById('folder3').classList.contains('opened');
   if (isNowClosed) {
@@ -269,6 +271,8 @@ document.getElementById('folder3').addEventListener('click', () => {
 });
 
 document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
+
+/*---projects panel: list, gallery, thumbnails with highlight---*/
 
 const projItems = document.querySelectorAll('.proj-item');
 const projDetailTitle = document.getElementById('projDetailTitle');
@@ -282,13 +286,20 @@ const projectData = {
   bharabas: {
     title: 'Bharabas Radio App Prototype',
     desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
-    images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png'],
+    images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
   // add project2, project3, project4 the same way
 };
 
 let currentProjectId = 'bharabas';
 let currentImageIndex = 0;
+let thumbElements = [];
+
+function updateActiveThumb() {
+  thumbElements.forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === currentImageIndex);
+  });
+}
 
 function renderProject(id) {
   const data = projectData[id];
@@ -302,7 +313,7 @@ function renderProject(id) {
   projGalleryImg.src = data.images[0];
 
   projThumbs.innerHTML = '';
-  data.images.forEach((src, i) => {
+  thumbElements = data.images.map((src, i) => {
     const thumb = document.createElement('img');
     thumb.src = src;
     thumb.className = 'proj-thumb';
@@ -310,9 +321,13 @@ function renderProject(id) {
     thumb.addEventListener('click', () => {
       currentImageIndex = i;
       projGalleryImg.src = src;
+      updateActiveThumb();
     });
     projThumbs.appendChild(thumb);
+    return thumb;
   });
+
+  updateActiveThumb();
 }
 
 projItems.forEach(item => {
@@ -329,6 +344,7 @@ projPrev.addEventListener('click', (e) => {
   const images = projectData[currentProjectId].images;
   currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
   projGalleryImg.src = images[currentImageIndex];
+  updateActiveThumb();
 });
 
 projNext.addEventListener('click', (e) => {
@@ -336,6 +352,7 @@ projNext.addEventListener('click', (e) => {
   const images = projectData[currentProjectId].images;
   currentImageIndex = (currentImageIndex + 1) % images.length;
   projGalleryImg.src = images[currentImageIndex];
+  updateActiveThumb();
 });
 
 renderProject('bharabas');
