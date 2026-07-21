@@ -228,10 +228,116 @@ registerFolderToggle('folder1', 'infoWrapperAbout', 'closeAbout');
 registerFolderToggle('folder2', 'infoWrapperProject', 'closeProject');
 registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 
-/*---skills panel: click a skill to update the content area + morph shape---*/
+/*---skills panel: click a skill to update content + morph shape---*/
 
 const skillIcons = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
+const skillContentBox = document.getElementById('skillContentBox');
+
+const skillVisuals = {
+  CSS: `
+    <div class="skill-visual">
+      <svg viewBox="0 0 100 100">
+        <path class="design-path" d="M25 20 L75 20 L70 65 L50 75 L30 65 L28 45 L65 45 L63 58 L50 63 L38 58 L37 52" />
+      </svg>
+      <div class="design-swatches">
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+      </div>
+    </div>
+  `,
+  JavaScript: `
+    <div class="skill-visual">
+      <svg viewBox="0 0 100 100">
+        <path class="design-path js-bolt" d="M55 15 L30 55 L48 55 L42 85 L72 42 L52 42 Z" />
+      </svg>
+      <div class="design-swatches">
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+      </div>
+    </div>
+  `,
+  HTML: `
+    <div class="skill-visual">
+      <svg viewBox="0 0 100 100">
+        <path class="design-path" d="M25 20 L30 80 L50 88 L70 80 L75 20 Z" />
+        <path class="design-path html-brackets" d="M40 40 L32 50 L40 60 M60 40 L68 50 L60 60" />
+      </svg>
+      <div class="design-swatches">
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+      </div>
+    </div>
+  `,
+  Design: `
+    <div class="skill-visual">
+      <svg viewBox="0 0 100 100">
+        <path class="design-path" d="M20 70 L20 30 Q20 20 30 20 L70 20 Q80 20 80 30 L80 70 Q80 80 70 80 L30 80 Q20 80 20 70 Z" />
+      </svg>
+      <div class="design-swatches">
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+        <span class="design-swatch"></span>
+      </div>
+    </div>
+  `,
+};
+
+let javaTypeInterval = null;
+
+function renderJavaVisual() {
+  skillContentBox.innerHTML = `
+    <div class="skill-code-panel">
+      <p class="skill-code-intro">Used in university coursework and personal projects, including CashFlo (a Java budget tracker) and a 2D game built with Processing. Comfortable applying core OOP principles — classes, encapsulation, inheritance — to structure real, working applications.</p>
+      <pre class="skill-code-block"><code id="javaCodeTyped"></code><span class="skill-code-cursor"></span></pre>
+    </div>
+  `;
+
+ const codeText = `public class Flo {
+    String[] skills = {"Java", "CSS", "JavaScript", "HTML"};
+    String favoriteThing = "design";
+    boolean stillGoogling = true; // even after 4 years
+
+    public String sayHi() {
+        return "hey, welcome!";
+    }
+
+    public void debug() {
+        stareAtScreen();
+        findTypo();
+        fixIt();
+    }
+}`;
+
+  const codeEl = document.getElementById('javaCodeTyped');
+  let i = 0;
+
+  if (javaTypeInterval) clearInterval(javaTypeInterval);
+
+  javaTypeInterval = setInterval(() => {
+    if (i < codeText.length) {
+      codeEl.textContent += codeText[i];
+      i++;
+    } else {
+      clearInterval(javaTypeInterval);
+    }
+  }, 20);
+}
+
+function renderSkillVisual(skillName) {
+  if (skillName === 'Java') {
+    renderJavaVisual();
+  } else {
+    skillContentBox.innerHTML = skillVisuals[skillName] || '';
+  }
+}
 
 function resetSkillsPanel() {
   skillIcons.forEach(i => {
@@ -239,6 +345,8 @@ function resetSkillsPanel() {
     i.querySelector('.folder').classList.remove('opened');
   });
   skillContentTitle.textContent = 'Select a skill';
+  skillContentBox.innerHTML = '';
+  if (javaTypeInterval) clearInterval(javaTypeInterval);
 }
 
 skillIcons.forEach(icon => {
@@ -253,12 +361,16 @@ skillIcons.forEach(icon => {
       i.querySelector('.folder').classList.remove('opened');
     });
 
+    if (javaTypeInterval) clearInterval(javaTypeInterval);
+
     if (alreadySelected) {
       skillContentTitle.textContent = 'Select a skill';
+      skillContentBox.innerHTML = '';
     } else {
       icon.classList.add('selected');
       folderEl.classList.add('opened');
       skillContentTitle.textContent = icon.dataset.skill;
+      renderSkillVisual(icon.dataset.skill);
     }
   });
 });
@@ -304,7 +416,7 @@ const projectData = {
     title: 'Processing Game',
     desc: 'Developed a 2D interactive game using Processing (Java), implementing core game programming concepts such as player movement, collision detection, score tracking, game states, and object-oriented programming. The project focused on creating responsive gameplay while strengthening skills in event handling, animation, and game logic through a modular code structure.',
     tech: ['Processing', 'Java', 'Object-Oriented Programming', 'Game Development', 'Event Handling', 'Collision Detection'],
-    images: ['processinggame1.png', 'processinggame2.png', 'processinggame3.png', 'processinggame4.png'],
+    images: ['processinggame1.png', 'processinggame2.png'],
   },
 };
 
