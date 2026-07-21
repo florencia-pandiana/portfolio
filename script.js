@@ -228,7 +228,7 @@ registerFolderToggle('folder1', 'infoWrapperAbout', 'closeAbout');
 registerFolderToggle('folder2', 'infoWrapperProject', 'closeProject');
 registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 
-/*---skills panel: click a skill to update the content area---*/
+/*---skills panel: click a skill to update the content area + morph shape---*/
 
 const skillIcons = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
@@ -272,11 +272,11 @@ document.getElementById('folder3').addEventListener('click', () => {
 
 document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
 
-/*---projects panel: list, gallery, thumbnails with highlight---*/
+/*---projects panel: list, gallery, thumbnails with highlight, feature lists---*/
 
 const projItems = document.querySelectorAll('.proj-item');
 const projDetailTitle = document.getElementById('projDetailTitle');
-const projDetailDesc = document.getElementById('projDetailDesc');
+let projDetailDesc = document.getElementById('projDetailDesc');
 const projGalleryImg = document.getElementById('projGalleryImg');
 const projPrev = document.getElementById('projPrev');
 const projNext = document.getElementById('projNext');
@@ -288,7 +288,18 @@ const projectData = {
     desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
     images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
-  // add project2, project3, project4 the same way
+  cashflo: {
+    title: 'CashFlo Budget Tracker',
+    desc: 'Built CashFlo, a Java personal finance tracker designed with object-oriented programming principles. Implemented transaction management, category-based reporting, CSV data persistence, and an interactive command-line interface. The project highlights skills in software architecture, data handling, file operations, and modular Java development.',
+    features: [
+      'Add, edit, and manage income and expense transactions',
+      'View complete transaction history',
+      'Generate category-based spending summaries',
+      'Save and load financial data using CSV files',
+      'Interactive menu-driven command-line interface',
+    ],
+    images: ['cashflo1.png', 'cashflo2.png'],
+  },
 };
 
 let currentProjectId = 'bharabas';
@@ -309,7 +320,19 @@ function renderProject(id) {
   currentImageIndex = 0;
 
   projDetailTitle.textContent = data.title;
-  projDetailDesc.textContent = data.desc;
+
+  let descHTML = `<p class="proj-detail-desc-text">${data.desc}</p>`;
+  if (data.features && data.features.length > 0) {
+    const featureItems = data.features.map(f => `<li>${f}</li>`).join('');
+    descHTML += `<h4 class="proj-detail-subhead">Key Features</h4><ul class="proj-detail-list">${featureItems}</ul>`;
+  }
+
+  const newDescContainer = document.createElement('div');
+  newDescContainer.id = 'projDetailDesc';
+  newDescContainer.innerHTML = descHTML;
+  projDetailDesc.replaceWith(newDescContainer);
+  projDetailDesc = newDescContainer;
+
   projGalleryImg.src = data.images[0];
 
   projThumbs.innerHTML = '';
