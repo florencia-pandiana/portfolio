@@ -228,65 +228,25 @@ registerFolderToggle('folder1', 'infoWrapperAbout', 'closeAbout');
 registerFolderToggle('folder2', 'infoWrapperProject', 'closeProject');
 registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 
-/*---More panel: Skills network diagram + Certifications/Portfolio/Resume tabs---*/
+/*---About Me: render skill badges once on load---*/
+
+function renderAboutSkillsNetwork() {
+  const skills = ['HTML', 'CSS', 'JavaScript', 'Java', 'SQL'];
+
+  const badges = skills.map(name => `
+    <span class="skill-badge" data-skill="${name}">${name}</span>
+  `).join('');
+
+  document.getElementById('aboutSkillsNetwork').innerHTML = badges;
+}
+
+renderAboutSkillsNetwork();
+
+/*---More panel: Certifications/Portfolio/Resume tabs---*/
 
 const moreItems = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 const skillContentBox = document.getElementById('skillContentBox');
-
-function renderSkillsGrid() {
-  skillContentBox.innerHTML = `
-    <div class="skills-network">
-      <svg viewBox="0 0 300 220" class="skills-network-svg">
-        <!-- connecting lines -->
-        <line class="network-line" x1="150" y1="30"  x2="60"  y2="90"  />
-        <line class="network-line" x1="150" y1="30"  x2="150" y2="90"  />
-        <line class="network-line" x1="150" y1="30"  x2="240" y2="90"  />
-        <line class="network-line" x1="60"  y1="90"  x2="105" y2="160" />
-        <line class="network-line" x1="150" y1="90"  x2="105" y2="160" />
-        <line class="network-line" x1="150" y1="90"  x2="195" y2="160" />
-        <line class="network-line" x1="240" y1="90"  x2="195" y2="160" />
-
-        <!-- traveling pulses -->
-        <circle class="network-pulse" r="3">
-          <animateMotion dur="2.4s" repeatCount="indefinite" path="M150,30 L60,90 L105,160" />
-        </circle>
-        <circle class="network-pulse" r="3">
-          <animateMotion dur="2.8s" repeatCount="indefinite" path="M150,30 L150,90 L195,160" />
-        </circle>
-        <circle class="network-pulse" r="3">
-          <animateMotion dur="3.2s" repeatCount="indefinite" path="M150,30 L240,90 L195,160" />
-        </circle>
-
-        <!-- nodes -->
-        <g class="network-node" transform="translate(150,30)">
-          <circle r="20" />
-          <text y="5">HTML</text>
-        </g>
-        <g class="network-node" transform="translate(60,90)">
-          <circle r="20" />
-          <text y="5">CSS</text>
-        </g>
-        <g class="network-node" transform="translate(150,90)">
-          <circle r="20" />
-          <text y="5">JS</text>
-        </g>
-        <g class="network-node" transform="translate(240,90)">
-          <circle r="20" />
-          <text y="5">Java</text>
-        </g>
-        <g class="network-node" transform="translate(105,160)">
-          <circle r="20" />
-          <text y="5">SQL</text>
-        </g>
-        <g class="network-node" transform="translate(195,160)">
-          <circle r="20" />
-          <text y="5">flo</text>
-        </g>
-      </svg>
-    </div>
-  `;
-}
 
 function renderMoreTab(tabName, folderIconEl) {
   moreItems.forEach(i => {
@@ -296,13 +256,25 @@ function renderMoreTab(tabName, folderIconEl) {
   folderIconEl.classList.add('selected');
   folderIconEl.querySelector('.folder').classList.add('opened');
 
-  if (tabName === 'skills') {
-    skillContentTitle.textContent = 'Skills';
-    renderSkillsGrid();
-  } else if (tabName === 'certifications') {
-    skillContentTitle.textContent = 'Certifications';
-    skillContentBox.innerHTML = `<div class="more-placeholder">Add your certifications here.</div>`;
-  } else if (tabName === 'portfolio') {
+  if (tabName === 'certifications') {
+  skillContentTitle.textContent = 'Certifications';
+  skillContentBox.innerHTML = `
+    <div class="cert-list">
+      <div class="cert-item">
+        <span class="cert-dot"></span>
+        <span>COMP1010 Jan Hext Award</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-dot"></span>
+        <span>Certificate of Participation (ASA =DataFest 2026)</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-dot"></span>
+        <span>Diploma of Business Analytics</span>
+      </div>
+    </div>
+  `;
+} else if (tabName === 'portfolio') {
     skillContentTitle.textContent = 'Portfolio';
     skillContentBox.innerHTML = `<div class="more-placeholder">Add your design portfolio here.</div>`;
   } else if (tabName === 'resume') {

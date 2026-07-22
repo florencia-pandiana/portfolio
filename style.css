@@ -404,7 +404,7 @@ img {
   top: max(8%, 3rem);
   left: min(40%, 25rem);
   right: 0;
-  bottom: 5%;
+  bottom: 18%;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -425,6 +425,64 @@ img {
   font-size: clamp(0.7rem, 1.3vh + 0.2vw, 1.1rem);
   line-height: 1.5;
   color: #5F5E5A;
+}
+
+.about-skills-network {
+  position: absolute;
+  bottom: 3%;
+  left: min(40%, 25rem);
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.skill-badge {
+  display: inline-block;
+  font-size: clamp(0.65rem, 1.3vh, 0.85rem);
+  color: #6E7378;
+  background-color: #EFEDE7;
+  border: 1px solid #D3D1C7;
+  padding: 0.3rem 0.9rem;
+  border-radius: 1rem;
+  cursor: default;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.skill-badge:hover {
+  transform: scale(1.1);
+}
+.skill-badge[data-skill="HTML"]:hover {
+  background-color: #e5765a;
+  border-color: #E44D26;
+  color: #FFFFFF;
+}
+
+.skill-badge[data-skill="CSS"]:hover {
+  background-color: #748adf;
+  border-color: #4968e6;
+  color: #FFFFFF;
+}
+
+.skill-badge[data-skill="JavaScript"]:hover {
+  background-color: #eee39b;
+  border-color: #efd94a;
+  color: #444441;
+}
+
+.skill-badge[data-skill="Java"]:hover {
+  background-color: #e29b59;
+  border-color: #e5872f;
+  color: #FFFFFF;
+}
+
+.skill-badge[data-skill="SQL"]:hover {
+  background-color: #5681a2;
+  border-color: #437ba7;
+  color: #FFFFFF;
 }
 
 /*---projects panel---*/
@@ -785,57 +843,6 @@ img {
   overflow: hidden;
 }
 
-/*---skills grid (shown when More > Skills is selected)---*/
-
-.skills-grid {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.skills-grid-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  width: 18%;
-  min-width: 4rem;
-}
-
-.skills-grid-item svg {
-  width: 70%;
-  max-width: 3.5rem;
-}
-
-.skills-grid-item span {
-  font-size: clamp(0.6rem, 1.1vh, 0.85rem);
-  color: #6E7378;
-}
-
-.design-path {
-  fill: none;
-  stroke: #6E7378;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  animation: drawShape 2.6s ease-in-out infinite;
-}
-
-@keyframes drawShape {
-  0% { stroke-dashoffset: 300; }
-  55% { stroke-dashoffset: 0; }
-  85% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -300; }
-}
-
-/*---placeholder content for other More tabs---*/
-
 .more-placeholder {
   width: 100%;
   height: 100%;
@@ -849,38 +856,30 @@ img {
   color: #6E7378;
 }
 
-.skills-network {
+/*---certs---*/
+.cert-list {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
 }
 
-.skills-network-svg {
-  width: 90%;
-  max-width: 20rem;
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(0.75rem, 1.4vh, 1rem);
+  color: #444441;
 }
 
-.network-line {
-  stroke: #D3D1C7;
-  stroke-width: 1.5;
-}
-
-.network-node circle {
-  fill: #DCDCDC;
-  stroke: #6E7378;
-  stroke-width: 1.5;
-}
-
-.network-node text {
-  font-size: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  fill: #444441;
-  text-anchor: middle;
-  font-weight: 500;
-}
-
-.network-pulse {
-  fill: #c2893b;
+.cert-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #c8a87b;
+  flex-shrink: 0;
 }
