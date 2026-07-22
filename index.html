@@ -22,7 +22,14 @@
 
     <div class="homescreen" id="homescreen" style="display: none;">
         <div class="taskbar"></div>
-        <div class="todo"></div>
+        <div class="todo">
+            <div class="todo-header">
+                <h3 class="todo-title">Flo's To Do</h3>
+                <span class="todo-date" id="todoDate"></span>
+            </div>
+            <div class="todo-week" id="todoWeek"></div>
+            <div class="todo-list" id="todoList"></div>
+        </div>
 
         <div class="whole-folder" id="whole">
             <div class="folder-icon">
@@ -75,16 +82,18 @@
             <div class="info-header"></div>
             <div class="divider1"></div>
             <img src="close.png" alt="close button" class="close" id="closeAbout">
-            <div class="info-text">
+            <div class="info-right">
                 <h3 class="info-name" id="infoAboutName">Florencia Pandiana</h3>
-                <p class="info-intro">Studying Software Technology at Macquarie University, where I did Business
-                    Analytics in my diploma beforehand.
-                </p>
-                <p class="info-intro">I like working across both design and development, web, UI/UX, game systems, and
-                    enjoy turning an idea into something real. Some of that's through coursework, some just building
-                    stuff on the side.</p>
+                <div class="info-text">
+                    <p class="info-intro">Studying Software Technology at Macquarie University, where I did Business
+                        Analytics in my diploma beforehand.
+                    </p>
+                    <p class="info-intro">I like working across both design and development, web, UI/UX, game systems, and
+                        enjoy turning an idea into something real. Some of that's through coursework, some just building
+                        stuff on the side.</p>
+                </div>
+                <div class="about-skills-network" id="aboutSkillsNetwork"></div>
             </div>
-            <div class="about-skills-network" id="aboutSkillsNetwork"></div>
         </div>
     </div>
 
@@ -95,6 +104,9 @@
             <div class="divider-project"></div>
             <div class="divider-project2"></div>
             <img src="close.png" alt="close button" class="close" id="closeProject">
+            <button class="proj-sidebar-toggle" id="projSidebarToggle" title="Toggle sidebar">
+                <img src="sidebar.png" alt="Toggle sidebar" class="proj-sidebar-icon">
+            </button>
 
             <div class="proj-list" id="projList">
                 <div class="proj-item selected" data-proj="bharabas">
@@ -155,7 +167,7 @@
                         <div class="folder-body2"><span>flo</span></div>
                         <img src="star.png" alt="star">
                     </div>
-                    <span>Certifications</span>
+                    <span>certs</span>
                 </div>
                 <div class="skill-icon" data-more="portfolio">
                     <div class="folder">
@@ -165,7 +177,7 @@
                         <div class="folder-body2"><span>flo</span></div>
                         <img src="star.png" alt="star">
                     </div>
-                    <span>Portfolio</span>
+                    <span>portfolio</span>
                 </div>
                 <div class="skill-icon" data-more="resume">
                     <div class="folder">
@@ -175,12 +187,16 @@
                         <div class="folder-body2"><span>flo</span></div>
                         <img src="star.png" alt="star">
                     </div>
-                    <span>Resume</span>
+                    <span>resume</span>
                 </div>
             </div>
 
             <div class="skill-content">
-                <h3 class="skill-content-title" id="skillContentTitle">Select an option</h3>
+                <div class="skill-content-header">
+                    <button class="skill-content-nav" id="skillContentPrev" aria-label="Previous">&lt;</button>
+                    <h3 class="skill-content-title" id="skillContentTitle">Select an option</h3>
+                    <button class="skill-content-nav" id="skillContentNext" aria-label="Next">&gt;</button>
+                </div>
                 <div class="skill-content-box" id="skillContentBox"></div>
             </div>
 

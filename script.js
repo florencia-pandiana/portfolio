@@ -14,6 +14,79 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 10000);
 
+/*---todo widget---*/
+
+const todoTasks = [
+  { label: 'LockedIn', checked: false },
+];
+
+const TODO_ROW_COUNT = 6;
+
+function renderTodoDate() {
+  const now = new Date();
+  document.getElementById('todoDate').textContent = now.toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function renderTodoWeek() {
+  const dayLabels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+  const now = new Date();
+  const dayIndex = now.getDay();
+  const mondayOffset = dayIndex === 0 ? -6 : 1 - dayIndex;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + mondayOffset);
+
+  const cells = dayLabels.map((label, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const isToday = d.toDateString() === now.toDateString();
+    return `
+      <div class="todo-day${isToday ? ' today' : ''}">
+        <span class="todo-day-label">${label}</span>
+        <span class="todo-day-num">${d.getDate()}</span>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('todoWeek').innerHTML = cells;
+}
+
+function renderTodoList() {
+  const rows = [];
+
+  for (let i = 0; i < TODO_ROW_COUNT; i++) {
+    const task = todoTasks[i];
+    if (task) {
+      rows.push(`
+        <div class="todo-row">
+          <span class="todo-checkbox${task.checked ? ' checked' : ''}" data-index="${i}">${task.checked ? '&#10003;' : ''}</span>
+          <span class="todo-label${task.checked ? ' checked' : ''}">${task.label}</span>
+        </div>
+      `);
+    } else {
+      rows.push('<div class="todo-row"></div>');
+    }
+  }
+
+  document.getElementById('todoList').innerHTML = rows.join('');
+
+  document.querySelectorAll('.todo-checkbox').forEach(box => {
+    box.addEventListener('click', () => {
+      const i = Number(box.dataset.index);
+      todoTasks[i].checked = !todoTasks[i].checked;
+      renderTodoList();
+    });
+  });
+}
+
+renderTodoDate();
+renderTodoWeek();
+renderTodoList();
+
 /*---elements---*/
 
 const lockscreen = document.getElementById('lockscreen');
@@ -182,7 +255,7 @@ folder.addEventListener('click', (e) => {
   }
 });
 
-/*---reusable folder toggle system (About/Projects/More)---*/
+/*---reusable folder toggle system---*/
 
 const allToggles = [];
 
@@ -228,7 +301,7 @@ registerFolderToggle('folder1', 'infoWrapperAbout', 'closeAbout');
 registerFolderToggle('folder2', 'infoWrapperProject', 'closeProject');
 registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 
-/*---About Me: render skill badges once on load---*/
+/*---About Me: skill badges---*/
 
 function renderAboutSkillsNetwork() {
   const skills = ['HTML', 'CSS', 'JavaScript', 'Java', 'SQL'];
@@ -247,8 +320,160 @@ renderAboutSkillsNetwork();
 const moreItems = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 const skillContentBox = document.getElementById('skillContentBox');
+const infoSkills = document.getElementById('info-skills');
+
+const certData = [
+  {
+    title: 'COMP1010 2025 Jan Hext Prize',
+    subtitle: 'Awarded for academic excellence in the unit COMP1010 Fundamentals of Computer Science',
+    image: 'JanHext.JPG',
+  },
+  {
+    title: 'Certificate of Participation — ASA DataFest 2026',
+    subtitle: '',
+    image: 'cert-datafest.png',
+  },
+  {
+    title: 'Diploma of Business Analytics',
+    subtitle: '2024–2025, Average WAM 92',
+    image: 'cert-diploma.png',
+  },
+  {
+    title: 'COMP2700 — Project Management and Professional Practice',
+    subtitle: 'Session 2, 2025',
+    image: 'cert-comp2700.png',
+  },
+  {
+    title: 'COMP1010 — Fundamentals of Computer Science',
+    subtitle: 'Session 2, 2025',
+    image: 'cert-comp1010.png',
+  },
+];
+
+let expandedCertIndex = null;
+
+const certIconColors = ['#c2893b', '#4A90A4', '#B25068', '#5B8C5A', '#7B6FA6'];
+
+function renderCertList() {
+  skillContentBox.innerHTML = `
+    <div class="cert-list">
+      <div class="cert-group">
+        ${certData.map((cert, i) => `
+          <div class="cert-row${cert.subtitle ? '' : ' no-subtitle'}${i === expandedCertIndex ? ' expanded' : ''}" data-index="${i}">
+            <span class="cert-row-icon" style="background-color: ${certIconColors[i % certIconColors.length]}">&#10022;</span>
+            <div class="cert-row-main">
+              <div class="cert-row-head">
+                <p class="cert-row-title">${cert.title}</p>
+                ${cert.subtitle ? '<span class="cert-row-chevron">&rsaquo;</span>' : ''}
+              </div>
+              ${cert.subtitle ? `<div class="cert-row-body"><div class="cert-row-body-inner"><p class="cert-row-subtitle">${cert.subtitle}</p></div></div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  skillContentBox.querySelectorAll('.cert-row:not(.no-subtitle)').forEach(row => {
+    row.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const i = Number(row.dataset.index);
+      expandedCertIndex = expandedCertIndex === i ? null : i;
+      renderCertList();
+    });
+  });
+}
+
+/*---Portfolio: swipeable image carousel---*/
+
+const portfolioData = [
+  { title: 'Design 1', subtitle: '', image: 'design1.PNG' },
+  { title: 'Design 2', subtitle: '', image: 'design2.PNG' },
+  { title: 'Design 3', subtitle: '', image: 'design3.PNG' },
+  { title: 'Design 4', subtitle: '', image: 'design4.png' },
+  { title: 'Design 5', subtitle: '', image: 'design5.png' },
+  { title: 'Design 6', subtitle: '', image: 'design6.PNG' },
+  { title: 'Design 7', subtitle: '', image: 'design7.jpg' },
+  { title: 'Design 8', subtitle: '', image: 'design8.jpg' },
+  { title: 'Design 9', subtitle: '', image: 'design9.jpg' },
+];
+
+let currentPortfolioIndex = 0;
+
+function goToPortfolio(delta) {
+  currentPortfolioIndex = (currentPortfolioIndex + delta + portfolioData.length) % portfolioData.length;
+  renderPortfolio();
+}
+
+function renderPortfolio() {
+  const prevItem = portfolioData[(currentPortfolioIndex - 1 + portfolioData.length) % portfolioData.length];
+  const item = portfolioData[currentPortfolioIndex];
+  const nextItem = portfolioData[(currentPortfolioIndex + 1) % portfolioData.length];
+
+  skillContentBox.innerHTML = `
+    <div class="portfolio-view">
+      <div class="portfolio-stage" id="portfolioStage">
+        <div class="portfolio-card portfolio-card-side portfolio-card-prev">
+          <img src="${prevItem.image}" alt="${prevItem.title}" class="portfolio-card-img">
+        </div>
+        <div class="portfolio-card portfolio-card-main">
+          <img src="${item.image}" alt="${item.title}" class="portfolio-card-img">
+        </div>
+        <div class="portfolio-card portfolio-card-side portfolio-card-next">
+          <img src="${nextItem.image}" alt="${nextItem.title}" class="portfolio-card-img">
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <p class="portfolio-card-title">${item.title}</p>
+        ${item.subtitle ? `<p class="portfolio-card-subtitle">${item.subtitle}</p>` : ''}
+      </div>
+      <div class="portfolio-nav">
+        <button class="proj-nav-btn" id="portfolioPrev">&lt;</button>
+        <div class="portfolio-dots">
+          ${portfolioData.map((_, i) => `<span class="portfolio-dot${i === currentPortfolioIndex ? ' active' : ''}"></span>`).join('')}
+        </div>
+        <button class="proj-nav-btn" id="portfolioNext">&gt;</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('portfolioPrev').addEventListener('click', (e) => {
+    e.stopPropagation();
+    goToPortfolio(-1);
+  });
+
+  document.getElementById('portfolioNext').addEventListener('click', (e) => {
+    e.stopPropagation();
+    goToPortfolio(1);
+  });
+
+  const stage = document.getElementById('portfolioStage');
+  let dragStartX = null;
+
+  stage.addEventListener('pointerdown', (e) => {
+    dragStartX = e.clientX;
+  });
+
+  stage.addEventListener('pointerup', (e) => {
+    if (dragStartX === null) return;
+    const diff = e.clientX - dragStartX;
+    dragStartX = null;
+    if (Math.abs(diff) > 40) {
+      goToPortfolio(diff < 0 ? 1 : -1);
+    }
+  });
+
+  stage.addEventListener('pointerleave', () => {
+    dragStartX = null;
+  });
+}
+
+let currentMoreTab = null;
 
 function renderMoreTab(tabName, folderIconEl) {
+  infoSkills.classList.remove('no-selection');
+  currentMoreTab = tabName;
+
   moreItems.forEach(i => {
     i.classList.remove('selected');
     i.querySelector('.folder').classList.remove('opened');
@@ -257,46 +482,103 @@ function renderMoreTab(tabName, folderIconEl) {
   folderIconEl.querySelector('.folder').classList.add('opened');
 
   if (tabName === 'certifications') {
-  skillContentTitle.textContent = 'Certifications';
-  skillContentBox.innerHTML = `
-    <div class="cert-list">
-      <div class="cert-item">
-        <span class="cert-dot"></span>
-        <span>COMP1010 Jan Hext Award</span>
-      </div>
-      <div class="cert-item">
-        <span class="cert-dot"></span>
-        <span>Certificate of Participation (ASA =DataFest 2026)</span>
-      </div>
-      <div class="cert-item">
-        <span class="cert-dot"></span>
-        <span>Diploma of Business Analytics</span>
-      </div>
-    </div>
-  `;
-} else if (tabName === 'portfolio') {
+    skillContentTitle.textContent = 'Certifications';
+    expandedCertIndex = null;
+    renderCertList();
+  } else if (tabName === 'portfolio') {
     skillContentTitle.textContent = 'Portfolio';
-    skillContentBox.innerHTML = `<div class="more-placeholder">Add your design portfolio here.</div>`;
+    currentPortfolioIndex = 0;
+    renderPortfolio();
   } else if (tabName === 'resume') {
     skillContentTitle.textContent = 'Resume';
-    skillContentBox.innerHTML = `<div class="more-placeholder">Add your resume here.</div>`;
+    skillContentBox.innerHTML = `
+      <div class="resume-view">
+        <a href="resume.pdf" download class="resume-download-btn" title="Download resume">
+          <img src="download.png" alt="Download" class="resume-download-icon">
+        </a>
+        <div class="resume-preview">
+          <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0" class="resume-frame" title="Resume"></iframe>
+        </div>
+      </div>
+    `;
   }
 }
 
 moreItems.forEach(item => {
   item.addEventListener('click', (e) => {
     e.stopPropagation();
-    renderMoreTab(item.dataset.more, item);
+    const isOpen = item.querySelector('.folder').classList.contains('opened');
+    if (isOpen) {
+      resetSkillsPanel();
+    } else {
+      renderMoreTab(item.dataset.more, item);
+    }
   });
 });
 
+const moreOptionLabels = {
+  certifications: 'certs',
+  portfolio: 'portfolio',
+  resume: 'resume',
+};
+
+const moreTabOrder = Object.keys(moreOptionLabels);
+
+function goToMoreTab(delta) {
+  if (!currentMoreTab) return;
+  const idx = moreTabOrder.indexOf(currentMoreTab);
+  const nextTab = moreTabOrder[(idx + delta + moreTabOrder.length) % moreTabOrder.length];
+  const sidebarItem = Array.from(moreItems).find(i => i.dataset.more === nextTab);
+  renderMoreTab(nextTab, sidebarItem);
+}
+
+document.getElementById('skillContentPrev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  goToMoreTab(-1);
+});
+
+document.getElementById('skillContentNext').addEventListener('click', (e) => {
+  e.stopPropagation();
+  goToMoreTab(1);
+});
+
+function renderEmptyState() {
+  skillContentBox.innerHTML = `
+    <div class="empty-state-icons">
+      ${Object.entries(moreOptionLabels).map(([key, label]) => `
+        <div class="skill-icon empty-state-icon" data-more="${key}">
+          <div class="folder">
+            <div class="folder-tab"></div>
+            <div class="folder-body"></div>
+            <div class="folder-body1"></div>
+            <div class="folder-body2"><span>flo</span></div>
+            <img src="star.png" alt="star">
+          </div>
+          <span>${label}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  skillContentBox.querySelectorAll('.empty-state-icon').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const sidebarItem = Array.from(moreItems).find(i => i.dataset.more === el.dataset.more);
+      renderMoreTab(el.dataset.more, sidebarItem);
+    });
+  });
+}
+
 function resetSkillsPanel() {
+  infoSkills.classList.add('no-selection');
+  currentMoreTab = null;
+
   moreItems.forEach(i => {
     i.classList.remove('selected');
     i.querySelector('.folder').classList.remove('opened');
   });
   skillContentTitle.textContent = 'Select an option';
-  skillContentBox.innerHTML = '';
+  renderEmptyState();
 }
 
 document.getElementById('folder3').addEventListener('click', () => {
@@ -308,7 +590,9 @@ document.getElementById('folder3').addEventListener('click', () => {
 
 document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
 
-/*---projects panel: list, gallery, thumbnails with highlight, feature/tech lists---*/
+resetSkillsPanel();
+
+/*---projects panel---*/
 
 const projItems = document.querySelectorAll('.proj-item');
 const projDetailTitle = document.getElementById('projDetailTitle');
@@ -317,6 +601,14 @@ const projGalleryImg = document.getElementById('projGalleryImg');
 const projPrev = document.getElementById('projPrev');
 const projNext = document.getElementById('projNext');
 const projThumbs = document.getElementById('projThumbs');
+
+const infoProject = document.getElementById('info-project');
+const projSidebarToggle = document.getElementById('projSidebarToggle');
+
+projSidebarToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  infoProject.classList.toggle('sidebar-collapsed');
+});
 
 const projectData = {
   bharabas: {
