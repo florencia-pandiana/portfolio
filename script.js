@@ -182,7 +182,7 @@ folder.addEventListener('click', (e) => {
   }
 });
 
-/*---reusable folder toggle system (About/Projects/Skills)---*/
+/*---reusable folder toggle system (About/Projects/More)---*/
 
 const allToggles = [];
 
@@ -228,152 +228,104 @@ registerFolderToggle('folder1', 'infoWrapperAbout', 'closeAbout');
 registerFolderToggle('folder2', 'infoWrapperProject', 'closeProject');
 registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 
-/*---skills panel: click a skill to update content + morph shape---*/
+/*---More panel: Skills network diagram + Certifications/Portfolio/Resume tabs---*/
 
-const skillIcons = document.querySelectorAll('.skill-icon');
+const moreItems = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 const skillContentBox = document.getElementById('skillContentBox');
 
-const skillVisuals = {
-  CSS: `
-    <div class="skill-visual">
-      <svg viewBox="0 0 100 100">
-        <path class="design-path" d="M25 20 L75 20 L70 65 L50 75 L30 65 L28 45 L65 45 L63 58 L50 63 L38 58 L37 52" />
-      </svg>
-      <div class="design-swatches">
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-      </div>
-    </div>
-  `,
-  JavaScript: `
-    <div class="skill-visual">
-      <svg viewBox="0 0 100 100">
-        <path class="design-path js-bolt" d="M55 15 L30 55 L48 55 L42 85 L72 42 L52 42 Z" />
-      </svg>
-      <div class="design-swatches">
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-      </div>
-    </div>
-  `,
-  HTML: `
-    <div class="skill-visual">
-      <svg viewBox="0 0 100 100">
-        <path class="design-path" d="M25 20 L30 80 L50 88 L70 80 L75 20 Z" />
-        <path class="design-path html-brackets" d="M40 40 L32 50 L40 60 M60 40 L68 50 L60 60" />
-      </svg>
-      <div class="design-swatches">
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-      </div>
-    </div>
-  `,
-  Design: `
-    <div class="skill-visual">
-      <svg viewBox="0 0 100 100">
-        <path class="design-path" d="M20 70 L20 30 Q20 20 30 20 L70 20 Q80 20 80 30 L80 70 Q80 80 70 80 L30 80 Q20 80 20 70 Z" />
-      </svg>
-      <div class="design-swatches">
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-        <span class="design-swatch"></span>
-      </div>
-    </div>
-  `,
-};
-
-let javaTypeInterval = null;
-
-function renderJavaVisual() {
+function renderSkillsGrid() {
   skillContentBox.innerHTML = `
-    <div class="skill-code-panel">
-      <p class="skill-code-intro">Used in university coursework and personal projects, including CashFlo (a Java budget tracker) and a 2D game built with Processing. Comfortable applying core OOP principles — classes, encapsulation, inheritance — to structure real, working applications.</p>
-      <pre class="skill-code-block"><code id="javaCodeTyped"></code><span class="skill-code-cursor"></span></pre>
+    <div class="skills-network">
+      <svg viewBox="0 0 300 220" class="skills-network-svg">
+        <!-- connecting lines -->
+        <line class="network-line" x1="150" y1="30"  x2="60"  y2="90"  />
+        <line class="network-line" x1="150" y1="30"  x2="150" y2="90"  />
+        <line class="network-line" x1="150" y1="30"  x2="240" y2="90"  />
+        <line class="network-line" x1="60"  y1="90"  x2="105" y2="160" />
+        <line class="network-line" x1="150" y1="90"  x2="105" y2="160" />
+        <line class="network-line" x1="150" y1="90"  x2="195" y2="160" />
+        <line class="network-line" x1="240" y1="90"  x2="195" y2="160" />
+
+        <!-- traveling pulses -->
+        <circle class="network-pulse" r="3">
+          <animateMotion dur="2.4s" repeatCount="indefinite" path="M150,30 L60,90 L105,160" />
+        </circle>
+        <circle class="network-pulse" r="3">
+          <animateMotion dur="2.8s" repeatCount="indefinite" path="M150,30 L150,90 L195,160" />
+        </circle>
+        <circle class="network-pulse" r="3">
+          <animateMotion dur="3.2s" repeatCount="indefinite" path="M150,30 L240,90 L195,160" />
+        </circle>
+
+        <!-- nodes -->
+        <g class="network-node" transform="translate(150,30)">
+          <circle r="20" />
+          <text y="5">HTML</text>
+        </g>
+        <g class="network-node" transform="translate(60,90)">
+          <circle r="20" />
+          <text y="5">CSS</text>
+        </g>
+        <g class="network-node" transform="translate(150,90)">
+          <circle r="20" />
+          <text y="5">JS</text>
+        </g>
+        <g class="network-node" transform="translate(240,90)">
+          <circle r="20" />
+          <text y="5">Java</text>
+        </g>
+        <g class="network-node" transform="translate(105,160)">
+          <circle r="20" />
+          <text y="5">SQL</text>
+        </g>
+        <g class="network-node" transform="translate(195,160)">
+          <circle r="20" />
+          <text y="5">flo</text>
+        </g>
+      </svg>
     </div>
   `;
-
- const codeText = `public class Flo {
-    String[] skills = {"Java", "CSS", "JavaScript", "HTML"};
-    String favoriteThing = "design";
-    boolean stillGoogling = true; // even after 4 years
-
-    public String sayHi() {
-        return "hey, welcome!";
-    }
-
-    public void debug() {
-        stareAtScreen();
-        findTypo();
-        fixIt();
-    }
-}`;
-
-  const codeEl = document.getElementById('javaCodeTyped');
-  let i = 0;
-
-  if (javaTypeInterval) clearInterval(javaTypeInterval);
-
-  javaTypeInterval = setInterval(() => {
-    if (i < codeText.length) {
-      codeEl.textContent += codeText[i];
-      i++;
-    } else {
-      clearInterval(javaTypeInterval);
-    }
-  }, 20);
 }
 
-function renderSkillVisual(skillName) {
-  if (skillName === 'Java') {
-    renderJavaVisual();
-  } else {
-    skillContentBox.innerHTML = skillVisuals[skillName] || '';
-  }
-}
-
-function resetSkillsPanel() {
-  skillIcons.forEach(i => {
+function renderMoreTab(tabName, folderIconEl) {
+  moreItems.forEach(i => {
     i.classList.remove('selected');
     i.querySelector('.folder').classList.remove('opened');
   });
-  skillContentTitle.textContent = 'Select a skill';
-  skillContentBox.innerHTML = '';
-  if (javaTypeInterval) clearInterval(javaTypeInterval);
+  folderIconEl.classList.add('selected');
+  folderIconEl.querySelector('.folder').classList.add('opened');
+
+  if (tabName === 'skills') {
+    skillContentTitle.textContent = 'Skills';
+    renderSkillsGrid();
+  } else if (tabName === 'certifications') {
+    skillContentTitle.textContent = 'Certifications';
+    skillContentBox.innerHTML = `<div class="more-placeholder">Add your certifications here.</div>`;
+  } else if (tabName === 'portfolio') {
+    skillContentTitle.textContent = 'Portfolio';
+    skillContentBox.innerHTML = `<div class="more-placeholder">Add your design portfolio here.</div>`;
+  } else if (tabName === 'resume') {
+    skillContentTitle.textContent = 'Resume';
+    skillContentBox.innerHTML = `<div class="more-placeholder">Add your resume here.</div>`;
+  }
 }
 
-skillIcons.forEach(icon => {
-  icon.addEventListener('click', (e) => {
+moreItems.forEach(item => {
+  item.addEventListener('click', (e) => {
     e.stopPropagation();
-
-    const folderEl = icon.querySelector('.folder');
-    const alreadySelected = icon.classList.contains('selected');
-
-    skillIcons.forEach(i => {
-      i.classList.remove('selected');
-      i.querySelector('.folder').classList.remove('opened');
-    });
-
-    if (javaTypeInterval) clearInterval(javaTypeInterval);
-
-    if (alreadySelected) {
-      skillContentTitle.textContent = 'Select a skill';
-      skillContentBox.innerHTML = '';
-    } else {
-      icon.classList.add('selected');
-      folderEl.classList.add('opened');
-      skillContentTitle.textContent = icon.dataset.skill;
-      renderSkillVisual(icon.dataset.skill);
-    }
+    renderMoreTab(item.dataset.more, item);
   });
 });
+
+function resetSkillsPanel() {
+  moreItems.forEach(i => {
+    i.classList.remove('selected');
+    i.querySelector('.folder').classList.remove('opened');
+  });
+  skillContentTitle.textContent = 'Select an option';
+  skillContentBox.innerHTML = '';
+}
 
 document.getElementById('folder3').addEventListener('click', () => {
   const isNowClosed = !document.getElementById('folder3').classList.contains('opened');
