@@ -896,6 +896,12 @@ img {
   background-color: #FFFFFF;
   border-radius: 1.5rem;
   overflow: hidden;
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.info-skills.no-selection {
+  width: 55%;
+  height: 60%;
 }
 
 .divider-skills {
@@ -1100,6 +1106,17 @@ img {
   color: #6E7378;
 }
 
+/*---skill content: smooth fade whenever the panel content swaps---*/
+
+.skill-content-box > * {
+  animation: skill-content-fade-in 0.3s ease;
+}
+
+@keyframes skill-content-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /*---skill content empty state: pick from three folders---*/
 
 .empty-state-icons {
@@ -1211,11 +1228,11 @@ img {
 }
 
 .cert-row:hover .cert-row-icon {
-  transform: rotate(-14deg) scale(1.2);
+  transform: rotate(-14deg);
 }
 
 .cert-row:active .cert-row-icon {
-  transform: rotate(6deg) scale(0.9);
+  transform: rotate(6deg);
 }
 
 .cert-row-main {

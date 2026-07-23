@@ -352,7 +352,7 @@ const certData = [
 
 let expandedCertIndex = null;
 
-const certIconColors = ['#c2893b', '#4A90A4', '#B25068', '#5B8C5A', '#7B6FA6'];
+const certIconColors = ['#d0b692', '#82a3ac', '#ae828d', '#769775', '#928da3'];
 
 function renderCertList() {
   skillContentBox.innerHTML = `
@@ -629,6 +629,19 @@ const projectData = {
     ],
     skills: ['Java', 'Object-Oriented Programming', 'Software Architecture', 'File I/O', 'CSV Data Handling', 'CLI Design'],
     images: ['CashFlo1.png', 'CashFlo2.png', 'CashFlo3.png', 'CashFlo4.png', 'CashFlo5.png', 'CashFlo6.png', 'CashFlo7.png'],
+  },
+  simba: {
+    title: 'Simba',
+    desc: 'A 2D top-down action-adventure built in Unity using Visual Scripting, where the player races against a countdown timer to rescue a kidnapped dog from a monster-infested camp. Designed and built the full game loop solo, from mechanics to UI to a WebGL build shipped on itch.io.',
+    features: [
+      'Dual-weapon combat system (sword + ranged wand) with real-time switching',
+      'Procedurally escalating enemy difficulty and a two-phase boss encounter',
+      'Enemy hazards with on-contact slow effects, plus chest-based rewards mixing permanent upgrades and temporary power-ups',
+      'Full UI/UX including health bar, timer, and game-over/replay flow',
+      'Playtested with a TA, with iterations made on timer pacing and UI placement based on feedback',
+    ],
+    skills: ['Unity', 'Visual Scripting (Script Graphs)', 'WebGL'],
+    images: ['Simba1.png', 'Simba2.png', 'Simba3.png', 'Simba4.png', 'Simba5.png', 'Simba6.png', 'Simba7.png', 'Simba8.png', 'Simba9.png', 'Simba10.png', 'Simba11.png'],
   },
   processinggame: {
     title: 'Processing Game',
