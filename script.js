@@ -614,6 +614,7 @@ const projectData = {
   bharabas: {
     title: 'Bharabas Radio App Prototype',
     desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
+    skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Agile', 'Client Communication'],
     images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
   cashflo: {
@@ -626,13 +627,14 @@ const projectData = {
       'Save and load financial data using CSV files',
       'Interactive menu-driven command-line interface',
     ],
-    images: ['cashflo1.png', 'cashflo2.png'],
+    skills: ['Java', 'Object-Oriented Programming', 'Software Architecture', 'File I/O', 'CSV Data Handling', 'CLI Design'],
+    images: ['CashFlo1.png', 'CashFlo2.png', 'CashFlo3.png', 'CashFlo4.png', 'CashFlo5.png', 'CashFlo6.png', 'CashFlo7.png'],
   },
   processinggame: {
     title: 'Processing Game',
     desc: 'Developed a 2D interactive game using Processing (Java), implementing core game programming concepts such as player movement, collision detection, score tracking, game states, and object-oriented programming. The project focused on creating responsive gameplay while strengthening skills in event handling, animation, and game logic through a modular code structure.',
-    tech: ['Processing', 'Java', 'Object-Oriented Programming', 'Game Development', 'Event Handling', 'Collision Detection'],
-    images: ['processinggame1.png', 'processinggame2.png'],
+    skills: ['Processing', 'Java', 'Object-Oriented Programming', 'Game Development', 'Event Handling', 'Collision Detection'],
+    images: ['processinggame1.png', 'processinggame2.png', 'processinggame3.png', 'processinggame4.png'],
   },
 };
 
@@ -662,9 +664,9 @@ function renderProject(id) {
     descHTML += `<h4 class="proj-detail-subhead">Key Features</h4><ul class="proj-detail-list">${featureItems}</ul>`;
   }
 
-  if (data.tech && data.tech.length > 0) {
-    const techItems = data.tech.map(t => `<span class="proj-tech-tag">${t}</span>`).join('');
-    descHTML += `<h4 class="proj-detail-subhead">Tech</h4><div class="proj-tech-list">${techItems}</div>`;
+  if (data.skills && data.skills.length > 0) {
+    const skillItems = data.skills.map(s => `<span class="proj-tech-tag">${s}</span>`).join('');
+    descHTML += `<h4 class="proj-detail-subhead">Skills</h4><div class="proj-tech-list">${skillItems}</div>`;
   }
 
   const newDescContainer = document.createElement('div');
