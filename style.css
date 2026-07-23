@@ -85,7 +85,7 @@ body {
   position: relative;
   height: 100dvh;
   margin: 0;
-  padding: clamp(3rem, 5vw, 4rem);
+  padding: clamp(1.5rem, min(5vw, 4dvh), 4rem);
   box-sizing: border-box;
   text-align: center;
   color: #6E7378;
@@ -93,35 +93,35 @@ body {
 }
 
 .time {
-  font-size: clamp(6rem, 19vw, 7rem);
+  font-size: clamp(2.75rem, min(19vw, 12dvh), 7rem);
   font-weight: 500;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .date {
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  font-size: clamp(0.9rem, min(4vw, 3.2dvh), 1.9rem);
   font-weight: 500;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .name {
   position: absolute;
-  bottom: clamp(3rem, 7vw, 3rem);
+  bottom: clamp(1rem, min(7vw, 4dvh), 3rem);
   left: 50%;
   transform: translateX(-50%);
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  font-size: clamp(0.9rem, min(4vw, 3.2dvh), 1.9rem);
   font-weight: 500;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .lockscreen-profile {
   position: absolute;
-  bottom: calc(clamp(3rem, 7vw, 3rem) + clamp(1.3rem, 4vw, 1.9rem) + 1.5rem);
+  bottom: calc(clamp(1rem, min(7vw, 4dvh), 3rem) + clamp(0.9rem, min(4vw, 3.2dvh), 1.9rem) + 1.5rem);
   left: 50%;
   top: auto;
   transform: translateX(-50%);
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   object-fit: cover;
   border: 0.2rem solid rgba(255, 255, 255, 0.85);
@@ -138,8 +138,8 @@ body {
   z-index: 6;
   top: calc(50dvh + 3.6rem);
   left: 50%;
-  width: clamp(1.25rem, 70vw, 15.625rem);
-  height: clamp(1rem, 56vw, 12.5rem);
+  width: clamp(7rem, min(70vw, 25dvh), 15.625rem);
+  height: clamp(5.6rem, min(56vw, 20dvh), 12.5rem);
   transform: translate(-50%, -50%);
   transition: top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease;
   container-type: inline-size;
@@ -215,9 +215,9 @@ body {
 
 img {
   position: absolute;
-  left: 0.3rem;
-  top: 2.8rem;
-  width: 2.8rem;
+  left: 1.92cqw;
+  top: 17.92cqw;
+  width: 17.92cqw;
   z-index: 3;
   transform: perspective(120px) rotateX(0deg);
   transform-origin: bottom;
@@ -601,6 +601,19 @@ img {
   background-color: #B4B2A9;
 }
 
+.info-profile-pic {
+  position: absolute;
+  left: 0;
+  width: min(40%, 25rem);
+  top: max(8%, 3rem);
+  height: calc(100% - max(8%, 3rem) - 3%);
+  padding: 1.5rem;
+  box-sizing: border-box;
+  object-fit: contain;
+  object-position: 50% 0%;
+  border-radius: 1.5rem;
+}
+
 .info-right {
   position: absolute;
   top: max(8%, 3rem);
@@ -815,8 +828,11 @@ img {
   left: min(20%, 10rem);
   width: calc(min(65%, 45rem) - min(20%, 10rem) - 2rem);
   top: calc(max(7%, 2.7rem) + 1rem);
-  bottom: 5%;
+  bottom: calc(max(7%, 2.7rem) + 1rem);
   margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   transition: left 0.6s ease, width 0.6s ease;
 }
 
@@ -827,7 +843,8 @@ img {
 
 .proj-gallery-frame {
   width: 100%;
-  height: calc(95% - 3rem);
+  flex: 1;
+  min-height: 0;
   background-color: #cbcbcb;
   border-radius: 0.6rem;
   display: flex;
@@ -856,7 +873,7 @@ img {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 0.5rem;
+  flex-shrink: 0;
 }
 
 .proj-nav-btn {
@@ -885,7 +902,7 @@ img {
 .proj-thumbs {
   display: flex;
   gap: 0.4rem;
-  margin-top: 0.5rem;
+  flex-shrink: 0;
   overflow-x: auto;
 }
 

@@ -171,10 +171,33 @@ document.addEventListener('click', (e) => {
     setTimeout(() => {
       lockscreen.style.display = 'none';
       homescreen.style.display = 'block';
-      cards.forEach(card => {
-        document.body.appendChild(card);
-        dockCardBesideTodo(card);
+
+      const startRects = cards.map(card => {
+        const previousTransform = card.style.transform;
+        card.style.transform = 'none';
+        const rect = card.getBoundingClientRect();
+        card.style.transform = previousTransform;
+        return rect;
       });
+
+      cards.forEach((card, i) => {
+        const rect = startRects[i];
+        document.body.appendChild(card);
+        card.style.transition = 'none';
+        card.style.position = 'fixed';
+        card.style.left = rect.left + 'px';
+        card.style.top = rect.top + 'px';
+        card.style.width = rect.width + 'px';
+        card.style.height = rect.height + 'px';
+      });
+
+      void document.body.offsetWidth;
+
+      cards.forEach(card => {
+        card.style.transition = 'left 0.4s ease, top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease';
+      });
+      dockAllCardsBesideTodo();
+
       cardsDocked = true;
     }, 400);
   }
