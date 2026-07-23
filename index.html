@@ -11,17 +11,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="preload" as="image" href="star.png">
+    <link rel="preload" as="image" href="chara.png">
+    <link rel="preload" as="image" href="simba.png">
+    <link rel="preload" as="image" href="headphones.png">
+    <link rel="preload" as="image" href="coffee.png">
 </head>
 
 <body>
     <div class="lockscreen" id="lockscreen">
         <div class="date" id="date"></div>
         <div class="time" id="time"></div>
+        <img src="chara.png" alt="profile picture" class="lockscreen-profile">
         <div class="name" id="name">Florencia Pandiana</div>
     </div>
 
     <div class="homescreen" id="homescreen" style="display: none;">
         <div class="taskbar"></div>
+        <img src="smiski.png" alt="smiski" class="taskbar-smiski">
         <a href="mailto:flo.pandiana@gmail.com" class="dock-icon dock-icon-gmail" title="Email me">
             <img src="gmail.png" alt="Gmail">
         </a>

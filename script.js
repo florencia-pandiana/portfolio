@@ -97,17 +97,13 @@ const card1 = document.getElementById('card1');
 const card2 = document.getElementById('card2');
 const card3 = document.getElementById('card3');
 const cards = [card1, card2, card3];
-
-const originalCardConfig = {
-  card1: { top: -50, height: 85, left: -5, width: 60, rotate: -15 },
-  card2: { top: -75, height: 100, left: 20, width: 60, rotate: 5 },
-  card3: { top: -45, height: 100, left: 45, width: 60, rotate: 20 },
-};
+const todoEl = document.querySelector('.todo');
+let cardsDocked = false;
 
 const cardEndTargets = {
-  card1: { topVh: 8,  leftVw: 6,  widthRem: 13, heightRem: 11.5, rotate: 0 },
-  card2: { topVh: 32, leftVw: 6,  widthRem: 13, heightRem: 11.5, rotate: 0 },
-  card3: { topVh: 8,  leftVw: 75, widthRem: 13, heightRem: 11.5, rotate: 0 },
+  card1: { widthRem: 15,   heightRem: 13.3, rotate: -8 },
+  card2: { widthRem: 15,   heightRem: 13.3, rotate: 6 },
+  card3: { widthRem: 15.5, heightRem: 13.7, rotate: 10 },
 };
 
 /*---math helpers---*/
@@ -116,111 +112,53 @@ function getRootFontSizePx() {
   return parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
-function clampPx(minRem, vwPercent, maxRem) {
+function dockCardBesideTodo(card) {
   const rootPx = getRootFontSizePx();
-  const minPx = minRem * rootPx;
-  const maxPx = maxRem * rootPx;
-  const preferredPx = window.innerWidth * vwPercent / 100;
-  return Math.min(Math.max(preferredPx, minPx), maxPx);
-}
+  const target = cardEndTargets[card.id];
+  const todoRect = todoEl.getBoundingClientRect();
+  const gapPx = 6 * rootPx;
+  const widthPx = target.widthRem * rootPx;
+  const heightPx = target.heightRem * rootPx;
 
-function getFolderUndockedRect() {
-  const width = clampPx(1.25, 70, 15.625);
-  const height = clampPx(1, 56, 12.5);
-  const left = window.innerWidth / 2 - width / 2;
-  const top = window.innerHeight / 2 - height / 2;
-  return { left, top, width, height };
-}
+  const screenMarginPx = 0.5 * rootPx;
+  const maxOverlapPx = widthPx * 0.5;
 
-function configToPx(config, folderRect) {
-  return {
-    left: folderRect.left + (folderRect.width * config.left / 100),
-    top: folderRect.top + (folderRect.height * config.top / 100),
-    width: folderRect.width * config.width / 100,
-    height: folderRect.height * config.height / 100,
-  };
-}
+  let leftPx;
+  let topPx;
 
-function easeInOutQuad(t) {
-  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-}
-
-/*---core animation loop---*/
-
-function animateCardFlight(card, startPx, startRotate, endPx, endRotate, duration, onComplete) {
-  card.style.transition = 'none';
-  const startTime = performance.now();
-
-  function frame(now) {
-    const elapsed = now - startTime;
-    const t = Math.min(elapsed / duration, 1);
-    const eased = easeInOutQuad(t);
-
-    const curLeft = startPx.left + (endPx.left - startPx.left) * eased;
-    const curTop = startPx.top + (endPx.top - startPx.top) * eased;
-    const curWidth = startPx.width + (endPx.width - startPx.width) * eased;
-    const curHeight = startPx.height + (endPx.height - startPx.height) * eased;
-    const curRotate = startRotate + (endRotate - startRotate) * eased;
-
-    const folderRectNow = folder.getBoundingClientRect();
-
-    const leftPct = (curLeft - folderRectNow.left) / folderRectNow.width * 100;
-    const topPct = (curTop - folderRectNow.top) / folderRectNow.height * 100;
-    const widthPct = curWidth / folderRectNow.width * 100;
-    const heightPct = curHeight / folderRectNow.height * 100;
-
-    card.style.left = leftPct + '%';
-    card.style.top = topPct + '%';
-    card.style.width = widthPct + '%';
-    card.style.height = heightPct + '%';
-    card.style.transform = `rotate(${curRotate}deg)`;
-
-    if (t < 1) {
-      requestAnimationFrame(frame);
-    } else if (onComplete) {
-      onComplete();
-    }
+  if (card.id === 'card1') {
+    const desiredLeft = todoRect.left - widthPx - gapPx;
+    leftPx = Math.min(Math.max(desiredLeft, screenMarginPx), todoRect.left - maxOverlapPx);
+    topPx = todoRect.top - heightPx * 0.3;
+  } else if (card.id === 'card2') {
+    const desiredLeft = todoRect.left - widthPx - gapPx;
+    leftPx = Math.min(Math.max(desiredLeft, screenMarginPx), todoRect.left - maxOverlapPx);
+    topPx = todoRect.bottom - heightPx + heightPx * 0.3;
+  } else {
+    const coffeeGapPx = 6 * rootPx;
+    const desiredLeft = todoRect.right + coffeeGapPx;
+    const maxLeft = window.innerWidth - widthPx - screenMarginPx;
+    leftPx = Math.max(Math.min(desiredLeft, maxLeft), todoRect.right - maxOverlapPx);
+    topPx = todoRect.top + todoRect.height / 2 - heightPx / 2;
   }
 
-  requestAnimationFrame(frame);
+  card.style.position = 'fixed';
+  card.style.left = leftPx + 'px';
+  card.style.top = topPx + 'px';
+  card.style.width = widthPx + 'px';
+  card.style.height = heightPx + 'px';
+  card.style.transform = `rotate(${target.rotate}deg)`;
 }
 
-/*---trigger functions---*/
-
-function flyCardsToHomescreen() {
-  const rootPx = getRootFontSizePx();
-
-  cards.forEach(card => {
-    const startRect = card.getBoundingClientRect();
-    const startRotate = originalCardConfig[card.id].rotate;
-
-    const target = cardEndTargets[card.id];
-    const endRect = {
-      left: (window.innerWidth * target.leftVw / 100),
-      top: (window.innerHeight * target.topVh / 100),
-      width: target.widthRem * rootPx,
-      height: target.heightRem * rootPx,
-    };
-
-    animateCardFlight(card, startRect, startRotate, endRect, target.rotate, 400);
-  });
+function dockAllCardsBesideTodo() {
+  cards.forEach(dockCardBesideTodo);
 }
 
-function flyCardsBackToFolder() {
-  const folderUndockedRect = getFolderUndockedRect();
-
-  cards.forEach(card => {
-    const startRect = card.getBoundingClientRect();
-    const startRotate = cardEndTargets[card.id].rotate;
-
-    const config = originalCardConfig[card.id];
-    const endRect = configToPx(config, folderUndockedRect);
-
-    animateCardFlight(card, startRect, startRotate, endRect, config.rotate, 400, () => {
-      card.removeAttribute('style');
-    });
-  });
-}
+window.addEventListener('resize', () => {
+  if (cardsDocked) {
+    dockAllCardsBesideTodo();
+  }
+});
 
 /*---unlocking screen---*/
 
@@ -230,10 +168,14 @@ document.addEventListener('click', (e) => {
   if (isLocked) {
     lockscreen.classList.add('unlocking');
     folder.classList.add('docked');
-    flyCardsToHomescreen();
     setTimeout(() => {
       lockscreen.style.display = 'none';
       homescreen.style.display = 'block';
+      cards.forEach(card => {
+        document.body.appendChild(card);
+        dockCardBesideTodo(card);
+      });
+      cardsDocked = true;
     }, 400);
   }
 });
@@ -248,7 +190,12 @@ folder.addEventListener('click', (e) => {
     lockscreen.classList.remove('unlocking');
     folder.classList.remove('docked');
     lockscreen.style.display = 'block';
-    flyCardsBackToFolder();
+    cardsDocked = false;
+
+    cards.forEach(card => {
+      folder.appendChild(card);
+      card.removeAttribute('style');
+    });
 
     allToggles.forEach(entry => {
       entry.wrapperEl.style.display = 'none';
@@ -488,7 +435,7 @@ function renderMoreTab(tabName, folderIconEl) {
   folderIconEl.querySelector('.folder').classList.add('opened');
 
   if (tabName === 'certifications') {
-    skillContentTitle.textContent = 'Certifications';
+    skillContentTitle.textContent = 'Achievements Certifications';
     expandedCertIndex = null;
     renderCertList();
   } else if (tabName === 'portfolio') {

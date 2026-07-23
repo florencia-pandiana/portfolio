@@ -1,3 +1,7 @@
+html {
+  font-size: clamp(15px, 0.9vw + 8px, 20px);
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -5,7 +9,11 @@ html, body {
 }
 
 body {
-  background-color: #EFEDE7;
+  background-color: #e1ded0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.35) 0, rgba(255, 255, 255, 0.35) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 0, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 3px),
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 60%);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -63,13 +71,13 @@ body {
 .placeholder1, .placeholder2, .placeholder3 {
   position: absolute;
   z-index: 2;
-  opacity: 0.6;
   object-fit: contain;
+  transition: none;
 }
 
 .placeholder1 { top: -50%; height: 85%; left: -5%; transform: rotate(-15deg); width: 60%; }
 .placeholder2 { top: -75%; height: 100%; left: 20%; transform: rotate(5deg); width: 60%; }
-.placeholder3 { top: -45%; height: 100%; left: 45%; transform: rotate(20deg); width: 60%; }
+.placeholder3 { top: -65%; height: 100%; left: 45%; transform: rotate(20deg); width: 60%; }
 
 
 /*---lockscreen---*/
@@ -81,7 +89,7 @@ body {
   box-sizing: border-box;
   text-align: center;
   color: #6E7378;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.4s ease;
 }
 
 .time {
@@ -104,6 +112,20 @@ body {
   font-size: clamp(1.3rem, 4vw, 1.9rem);
   font-weight: 500;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.lockscreen-profile {
+  position: absolute;
+  bottom: calc(clamp(3rem, 7vw, 3rem) + clamp(1.3rem, 4vw, 1.9rem) + 1.5rem);
+  left: 50%;
+  top: auto;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 0.2rem solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.3);
 }
 
 .lockscreen.unlocking {
@@ -141,7 +163,7 @@ body {
   position: relative;
   width: 40%;
   height: 6%;
-  background-color: #B9B9B9;
+  background-color: #bebebe;
   margin-bottom: -1%;
   border-radius: 0.75rem 0.75rem 0 0;
   transition: height 0.4s ease, margin-bottom 0.4s ease, border-radius 0.4s ease;
@@ -151,7 +173,7 @@ body {
   position: relative;
   width: 100%;
   height: 25%;
-  background-color: #B9B9B9;
+  background-color: #bebebe;
   border-radius: 0 0.75rem 0 0;
   transition: height 0.4s ease, border-radius 0.4s ease;
 }
@@ -180,7 +202,7 @@ body {
   left: 0;
   width: 100%;
   height: 83%;
-  background-color: #DBDBDB;
+  background-color: #d6d6d6;
   border-radius: 0.75rem;
   z-index: 3;
   font-family: "Palanquin Dark", sans-serif;
@@ -215,7 +237,7 @@ img {
   left: 50%;
   transform: translateX(-50%);
   bottom: 1.5rem;
-  width: clamp(13rem, 30vw, 20rem);
+  width: clamp(13rem, 34vw, 26rem);
   height: 4.5rem;
   background-color: #b1b1b18c;
   border-radius: 1rem;
@@ -254,11 +276,11 @@ img {
 }
 
 .dock-icon-gmail {
-  left: max(0.5rem, calc(50% - clamp(13rem, 30vw, 20rem) / 2 - 4.5rem - 0.6rem));
+  left: max(0.5rem, calc(50% - clamp(13rem, 34vw, 26rem) / 2 - 4.5rem - 0.6rem));
 }
 
 .dock-icon-linkedin {
-  left: min(calc(100vw - 4.5rem - 0.5rem), calc(50% + clamp(13rem, 30vw, 20rem) / 2 + 0.6rem));
+  left: min(calc(100vw - 4.5rem - 0.5rem), calc(50% + clamp(13rem, 34vw, 26rem) / 2 + 0.6rem));
 }
 
 .whole-folder {
@@ -269,18 +291,18 @@ img {
   top: 10%;
   left: 50%;
   transform: translate(-50%);
-  width: clamp(18rem, 40vw, 28rem);
+  width: clamp(18rem, 46vw, 36rem);
   height: 10%;
   cursor: pointer;
 }
 
 .todo {
-  background-color: #f0efed;
+  background-color: #f3f3f3;
   position: absolute;
   top: calc(40% - 3rem);
   left: 50%;
   transform: translate(-50%);
-  width: clamp(18rem, 40vw, 28rem);
+  width: clamp(18rem, 46vw, 36rem);
   height: 40%;
   border-radius: 1rem;
   box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.12);
@@ -340,7 +362,7 @@ img {
 }
 
 .todo-day.today {
-  background-color: #FAFAF8;
+  background-color: #c6d1d8;
   box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.08);
 }
 
@@ -380,8 +402,8 @@ img {
 }
 
 .todo-checkbox.checked {
-  background-color: #c2893b;
-  border-color: #c2893b;
+  background-color: #c6d1d8;
+  border-color: #a8b1b7;
 }
 
 .todo-label {
@@ -510,6 +532,11 @@ img {
   justify-content: center;
 }
 
+#infoWrapperSkills {
+  width: min(90%, 45rem);
+  max-width: 45rem;
+}
+
 .close {
   position: absolute;
   top: calc(max(7%, 2.7rem) / 2);
@@ -527,12 +554,25 @@ img {
   transform: translateY(-50%) scale(1.1);
 }
 
+.taskbar-smiski {
+  position: absolute;
+  top: auto;
+  left: calc(50% + clamp(13rem, 34vw, 26rem) / 2 - 3rem);
+  bottom: calc(1.5rem + 5.2rem);
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: contain;
+  z-index: 15;
+  transform: translate(-50%, 25%);
+  pointer-events: none;
+}
+
 .info-header {
   position: relative;
   width: 100%;
   height: 7%;
   min-height: 2.7rem;
-  background-color: #DCDCDC;
+  background-color: #c9d4db;
   border-radius: 1.5rem 1.5rem 0rem 0rem;
 }
 
@@ -542,7 +582,7 @@ img {
   position: relative;
   width: 80%;
   height: 80%;
-  background-color: #FFFFFF;
+  background-color: #edf2f5;
   border-radius: 1.5rem;
   overflow: hidden;
 }
@@ -658,7 +698,7 @@ img {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #FFFFFF;
+  background-color: #edf2f5;
   border-radius: 1.5rem;
   overflow: hidden;
 }
@@ -692,8 +732,8 @@ img {
   justify-content: center;
   width: 1.6rem;
   height: 1.6rem;
-  background-color: #DCDCDC;
-  border: none;
+  background-color: #ebebeb;
+  border: 1px solid #98999a;
   border-radius: 0.4rem;
   cursor: pointer;
   padding: 0.3rem;
@@ -741,7 +781,7 @@ img {
   flex-direction: column;
   gap: 0.6rem;
   overflow-y: auto;
-  background-color: rgba(220, 220, 220, 0.35);
+  background-color: rgba(172, 171, 171, 0.35);
   border-radius: 0.6rem;
   padding: 0.75rem 0.5rem;
   box-sizing: border-box;
@@ -759,14 +799,14 @@ img {
 }
 
 .proj-item.selected {
-  background-color: #c6e1f2;
+  background-color: #C4C2B8;
 }
 
 .proj-dot {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background-color: #6E7378;
+  background-color: #5c5f62;
   flex-shrink: 0;
 }
 
@@ -788,7 +828,7 @@ img {
 .proj-gallery-frame {
   width: 100%;
   height: calc(95% - 3rem);
-  background-color: #7d3c3c;
+  background-color: #cbcbcb;
   border-radius: 0.6rem;
   display: flex;
   align-items: center;
@@ -980,7 +1020,7 @@ img {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #FFFFFF;
+  background-color: #edf2f5;
   border-radius: 1.5rem;
   overflow: hidden;
   transition: width 0.4s ease, height 0.4s ease;
@@ -1555,7 +1595,7 @@ img {
   justify-content: center;
   width: 2.6rem;
   height: 2.6rem;
-  background-color: #A9C4D4;
+  background-color: #D6B27C;
   border-radius: 0.6rem;
   text-decoration: none;
   box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.15);
