@@ -64,11 +64,12 @@ body {
   position: absolute;
   z-index: 2;
   opacity: 0.6;
+  object-fit: contain;
 }
 
-.placeholder1 { top: -25%; height: 50%; left: 10%; transform: rotate(-15deg); width: 35%; }
-.placeholder2 { top: -40%; height: 60%; left: 30%; transform: rotate(5deg); width: 35%; }
-.placeholder3 { top: -20%; height: 60%; left: 50%; transform: rotate(20deg); width: 35%; }
+.placeholder1 { top: -50%; height: 85%; left: -5%; transform: rotate(-15deg); width: 60%; }
+.placeholder2 { top: -75%; height: 100%; left: 20%; transform: rotate(5deg); width: 60%; }
+.placeholder3 { top: -45%; height: 100%; left: 45%; transform: rotate(20deg); width: 60%; }
 
 
 /*---lockscreen---*/

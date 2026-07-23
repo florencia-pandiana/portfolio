@@ -99,15 +99,15 @@ const card3 = document.getElementById('card3');
 const cards = [card1, card2, card3];
 
 const originalCardConfig = {
-  card1: { top: -25, height: 50, left: 10, width: 35, rotate: -15 },
-  card2: { top: -40, height: 60, left: 30, width: 35, rotate: 5 },
-  card3: { top: -20, height: 60, left: 50, width: 35, rotate: 20 },
+  card1: { top: -50, height: 85, left: -5, width: 60, rotate: -15 },
+  card2: { top: -75, height: 100, left: 20, width: 60, rotate: 5 },
+  card3: { top: -45, height: 100, left: 45, width: 60, rotate: 20 },
 };
 
 const cardEndTargets = {
-  card1: { topVh: 8,  leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
-  card2: { topVh: 32, leftVw: 6,  widthRem: 8, heightRem: 7, rotate: 0 },
-  card3: { topVh: 8,  leftVw: 75, widthRem: 8, heightRem: 7, rotate: 0 },
+  card1: { topVh: 8,  leftVw: 6,  widthRem: 13, heightRem: 11.5, rotate: 0 },
+  card2: { topVh: 32, leftVw: 6,  widthRem: 13, heightRem: 11.5, rotate: 0 },
+  card3: { topVh: 8,  leftVw: 75, widthRem: 13, heightRem: 11.5, rotate: 0 },
 };
 
 /*---math helpers---*/
