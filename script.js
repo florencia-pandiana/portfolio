@@ -249,6 +249,12 @@ folder.addEventListener('click', (e) => {
     folder.classList.remove('docked');
     lockscreen.style.display = 'block';
     flyCardsBackToFolder();
+
+    allToggles.forEach(entry => {
+      entry.wrapperEl.style.display = 'none';
+      entry.folderEl.classList.remove('opened');
+    });
+
     setTimeout(() => {
       homescreen.style.display = 'none';
     }, 400);

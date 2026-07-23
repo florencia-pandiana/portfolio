@@ -214,11 +214,50 @@ img {
   left: 50%;
   transform: translateX(-50%);
   bottom: 1.5rem;
-  width: clamp(18rem, 40vw, 28rem);
+  width: clamp(13rem, 30vw, 20rem);
   height: 4.5rem;
   background-color: #b1b1b18c;
   border-radius: 1rem;
   box-sizing: border-box;
+}
+
+.dock-icon {
+  position: absolute;
+  bottom: 1.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b1b1b18c;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.dock-icon:hover {
+  transform: translateY(-0.3rem);
+  background-color: #b1b1b1c9;
+}
+
+.dock-icon img {
+  position: static;
+  top: auto;
+  left: auto;
+  width: 2.8rem;
+  height: 2.8rem;
+  object-fit: contain;
+  transform: none;
+}
+
+.dock-icon-gmail {
+  left: max(0.5rem, calc(50% - clamp(13rem, 30vw, 20rem) / 2 - 4.5rem - 0.6rem));
+}
+
+.dock-icon-linkedin {
+  left: min(calc(100vw - 4.5rem - 0.5rem), calc(50% + clamp(13rem, 30vw, 20rem) / 2 + 0.6rem));
 }
 
 .whole-folder {
@@ -368,37 +407,37 @@ img {
   top: auto;
   left: auto;
   transform: none;
-  width: 5rem;
-  height: 4rem;
+  width: 4rem;
+  height: 3.2rem;
 }
 
 .whole-folder .folder-tab {
-  height: 0.2rem;
+  height: 0.16rem;
 }
 
 .whole-folder .folder-body {
-  height: 3.6rem;
-  border-radius: 0 0.4rem 0.4rem 0.4rem;
+  height: 2.88rem;
+  border-radius: 0 0.32rem 0.32rem 0.32rem;
 }
 
 .whole-folder .folder-body1 {
-  top: 0.4rem;
-  height: 3rem;
-  border-radius: 0.4rem;
+  top: 0.32rem;
+  height: 2.4rem;
+  border-radius: 0.32rem;
 }
 
 .whole-folder .folder-body2 {
-  top: 0.6rem;
+  top: 0.48rem;
   left: -2%;
-  height: 3.5rem;
+  height: 2.8rem;
   width: 103%;
-  font-size: 1.6rem;
-  border-radius: 0.4rem;
+  font-size: 1.28rem;
+  border-radius: 0.32rem;
 }
 
 .whole-folder img {
-  width: 1.3rem;
-  top: 0.8rem;
+  width: 1.04rem;
+  top: 0.64rem;
 }
 
 /*---mini folder "opened" morph---*/
@@ -413,32 +452,32 @@ img {
 }
 
 .whole-folder .folder.opened {
-  width: 5.5rem;
-  height: 4.4rem;
+  width: 4.4rem;
+  height: 3.52rem;
 }
 
 .whole-folder .folder.opened .folder-tab {
-  height: 0.38rem;
-  margin-bottom: -0.1rem;
-  border-radius: 0.2rem 0.2rem 0 0;
+  height: 0.3rem;
+  margin-bottom: -0.08rem;
+  border-radius: 0.16rem 0.16rem 0 0;
 }
 
 .whole-folder .folder.opened .folder-body {
-  height: 3.15rem;
-  border-radius: 0 0.35rem;
+  height: 2.52rem;
+  border-radius: 0 0.28rem;
 }
 
 .whole-folder .folder.opened .folder-body1 {
   height: 0rem;
-  border-radius: 0 0.35rem;
+  border-radius: 0 0.28rem;
 }
 
 .whole-folder .folder.opened .folder-body2 {
-  top: 0.88rem;
+  top: 0.7rem;
   left: -8%;
   width: 116%;
-  height: 3.15rem;
-  border-radius: 0.35rem;
+  height: 2.52rem;
+  border-radius: 0.28rem;
   clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 7% 100%);
 }
 
@@ -447,9 +486,9 @@ img {
 }
 
 .whole-folder .folder.opened img {
-  top: 1.13rem;
-  left: -0.19rem;
-  width: 1.13rem;
+  top: 0.9rem;
+  left: -0.15rem;
+  width: 0.9rem;
   transform: perspective(120px) rotateX(-30deg);
 }
 
@@ -475,8 +514,8 @@ img {
   top: calc(max(7%, 2.7rem) / 2);
   transform: translateY(-50%);
   left: 2.5%;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   object-fit: contain;
   border-radius: 50%;
   cursor: pointer;
@@ -686,8 +725,8 @@ img {
 }
 
 .info-project.sidebar-collapsed .proj-sidebar-toggle {
-  top: calc(max(7%, 2.7rem) + 1.75rem);
-  left: calc(1% + 1.75rem);
+  top: calc(max(7%, 2.7rem) + 1rem + 0.5rem);
+  left: calc(1% + 1rem + 0.5rem);
   right: auto;
 }
 
@@ -887,6 +926,53 @@ img {
   border-radius: 1rem;
 }
 
+/*---projects panel: phone layout (sidebar + stacked picture/description)---*/
+
+@media (max-width: 700px) {
+  .proj-list {
+    left: 3%;
+    right: calc(100% - 35%);
+    padding: 0.75rem 0.5rem;
+  }
+
+  .divider-project2 {
+    left: 38%;
+  }
+
+  .divider-project {
+    display: none;
+  }
+
+  .proj-sidebar-toggle {
+    right: calc(100% - 38% + 1%);
+  }
+
+  .proj-gallery {
+    left: 38%;
+    right: 3%;
+    width: auto;
+    margin-left: 1rem;
+    top: calc(max(7%, 2.7rem) + 1rem);
+    bottom: 38%;
+  }
+
+  .proj-detail {
+    left: 38%;
+    right: 3%;
+    margin-left: 1rem;
+    top: 67%;
+    bottom: 5%;
+  }
+
+  .info-project.sidebar-collapsed .proj-gallery,
+  .info-project.sidebar-collapsed .proj-detail {
+    left: 3%;
+    right: 3%;
+    width: auto;
+    margin-left: 0;
+  }
+}
+
 /*---More panel---*/
 
 .info-skills {
@@ -900,7 +986,7 @@ img {
 }
 
 .info-skills.no-selection {
-  width: 55%;
+  width: 80%;
   height: 60%;
 }
 
@@ -968,7 +1054,9 @@ img {
 
 .list-of-skills .folder-body2 {
   top: 0.4rem;
+  left: -2%;
   height: 1.9rem;
+  width: 103%;
   font-size: 0.9rem;
   border-radius: 0.25rem;
 }
@@ -1123,12 +1211,19 @@ img {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 1rem clamp(1rem, 5vw, 4rem);
-  padding: 0.5rem 1rem;
+  gap: clamp(0.5rem, 5vw, 4rem);
+  padding: 0.5rem 4rem;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (max-width: 500px) {
+  .empty-state-icons .skill-icon {
+    transform: scale(0.7);
+  }
 }
 
 .empty-state-icons .skill-icon {
