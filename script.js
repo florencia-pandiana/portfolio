@@ -1,3 +1,29 @@
+/*---theme toggle---*/
+
+const themeToggle = document.getElementById('themeToggle');
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggle.textContent = '☀️';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    themeToggle.textContent = '\u{1F319}';
+  }
+}
+
+const savedTheme = localStorage.getItem('theme');
+const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+applyTheme(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
+
+themeToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const nextTheme = isDark ? 'light' : 'dark';
+  applyTheme(nextTheme);
+  localStorage.setItem('theme', nextTheme);
+});
+
 /*---lockscreen---*/
 
 function updateClock() {
@@ -116,7 +142,7 @@ function dockCardBesideTodo(card) {
   const rootPx = getRootFontSizePx();
   const target = cardEndTargets[card.id];
   const todoRect = todoEl.getBoundingClientRect();
-  const gapPx = 6 * rootPx;
+  const gapPx = 9 * rootPx;
   const widthPx = target.widthRem * rootPx;
   const heightPx = target.heightRem * rootPx;
 
@@ -129,13 +155,13 @@ function dockCardBesideTodo(card) {
   if (card.id === 'card1') {
     const desiredLeft = todoRect.left - widthPx - gapPx;
     leftPx = Math.min(Math.max(desiredLeft, screenMarginPx), todoRect.left - maxOverlapPx);
-    topPx = todoRect.top - heightPx * 0.3;
+    topPx = todoRect.top - heightPx * 0.6;
   } else if (card.id === 'card2') {
     const desiredLeft = todoRect.left - widthPx - gapPx;
     leftPx = Math.min(Math.max(desiredLeft, screenMarginPx), todoRect.left - maxOverlapPx);
-    topPx = todoRect.bottom - heightPx + heightPx * 0.3;
+    topPx = todoRect.bottom - heightPx + heightPx * 0.6;
   } else {
-    const coffeeGapPx = 6 * rootPx;
+    const coffeeGapPx = 9 * rootPx;
     const desiredLeft = todoRect.right + coffeeGapPx;
     const maxLeft = window.innerWidth - widthPx - screenMarginPx;
     leftPx = Math.max(Math.min(desiredLeft, maxLeft), todoRect.right - maxOverlapPx);
@@ -191,12 +217,14 @@ document.addEventListener('click', (e) => {
         card.style.height = rect.height + 'px';
       });
 
-      void document.body.offsetWidth;
-
-      cards.forEach(card => {
-        card.style.transition = 'left 0.4s ease, top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          cards.forEach(card => {
+            card.style.transition = 'left 0.4s ease, top 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease';
+          });
+          dockAllCardsBesideTodo();
+        });
       });
-      dockAllCardsBesideTodo();
 
       cardsDocked = true;
     }, 400);
