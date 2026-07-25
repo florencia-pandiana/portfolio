@@ -1,14 +1,15 @@
 /*---theme toggle---*/
 
 const themeToggle = document.getElementById('themeToggle');
+const themeToggleIcon = document.getElementById('themeToggleIcon');
 
 function applyTheme(theme) {
   if (theme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
-    themeToggle.textContent = '☀️';
+    themeToggleIcon.src = 'sun.png';
   } else {
     document.documentElement.removeAttribute('data-theme');
-    themeToggle.textContent = '\u{1F319}';
+    themeToggleIcon.src = 'moon.png';
   }
 }
 

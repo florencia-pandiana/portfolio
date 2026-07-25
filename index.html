@@ -19,7 +19,9 @@
 </head>
 
 <body>
-    <button id="themeToggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">&#127769;</button>
+    <button id="themeToggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <img src="moon.png" alt="" class="theme-toggle-icon" id="themeToggleIcon">
+    </button>
 
     <div class="lockscreen" id="lockscreen">
         <div class="date" id="date"></div>
@@ -94,7 +96,6 @@
     <!-- About Me info panel -->
     <div class="info-wrapper" id="infoWrapperAbout" style="display: none;">
         <div class="info-about" id="info-about">
-            <div class="info-header"></div>
             <div class="divider1"></div>
             <img src="close.png" alt="close button" class="close" id="closeAbout">
             <img src="profile.png" alt="Florencia Pandiana" class="info-profile-pic">
@@ -116,13 +117,9 @@
     <!-- Projects info panel -->
     <div class="info-wrapper" id="infoWrapperProject" style="display: none;">
         <div class="info-project" id="info-project">
-            <div class="info-header"></div>
             <div class="divider-project"></div>
             <div class="divider-project2"></div>
             <img src="close.png" alt="close button" class="close" id="closeProject">
-            <button class="proj-sidebar-toggle" id="projSidebarToggle" title="Toggle sidebar">
-                <img src="sidebar.png" alt="Toggle sidebar" class="proj-sidebar-icon">
-            </button>
 
             <div class="proj-list" id="projList">
                 <div class="proj-item selected" data-proj="bharabas">
@@ -148,8 +145,13 @@
                     <img src="bharabas1.png" alt="project image" class="proj-gallery-img" id="projGalleryImg">
                 </div>
                 <div class="proj-gallery-nav">
-                    <button class="proj-nav-btn" id="projPrev">&lt;</button>
-                    <button class="proj-nav-btn" id="projNext">&gt;</button>
+                    <button class="proj-sidebar-toggle" id="projSidebarToggle" title="Toggle sidebar">
+                        <img src="sidebar.png" alt="Toggle sidebar" class="proj-sidebar-icon">
+                    </button>
+                    <div class="proj-nav-arrows">
+                        <button class="proj-nav-btn" id="projPrev">&lt;</button>
+                        <button class="proj-nav-btn" id="projNext">&gt;</button>
+                    </div>
                 </div>
                 <div class="proj-thumbs" id="projThumbs">
                     <img src="bharabas1.png" alt="thumbnail" class="proj-thumb">
@@ -175,7 +177,6 @@
     <!-- More info panel -->
     <div class="info-wrapper" id="infoWrapperSkills" style="display: none;">
         <div class="info-skills" id="info-skills">
-            <div class="info-header"></div>
             <div class="divider-skills"></div>
 
             <div class="list-of-skills" id="listOfSkills">
