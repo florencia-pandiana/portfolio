@@ -319,12 +319,52 @@ function renderAboutSkillsNetwork() {
 
 renderAboutSkillsNetwork();
 
-/*---More panel: Certifications/Portfolio/Resume tabs---*/
+/*---More panel: Experience/Certifications/Portfolio/Resume tabs---*/
 
 const moreItems = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 const skillContentBox = document.getElementById('skillContentBox');
 const infoSkills = document.getElementById('info-skills');
+
+const experienceData = [
+  {
+    title: 'NCP (New Colombo Plan) Internship Program',
+    org: 'Macquarie University',
+    period: 'Indonesia, November 2025 - December 2025',
+    bullets: [
+      'Collaborated with a real client to design a mobile app and website prototype for a radio station.',
+      'Used Figma to create wireframes and interactive prototypes based on client and user needs.',
+      'Presented design ideas, received feedback, and refined solutions throughout the project.',
+      'Developed teamwork, communication, and problem-solving skills in an international setting.',
+    ],
+  },
+  {
+    title: 'Social Media Post Designer',
+    org: 'PPIA, Macquarie University',
+    period: 'February 2025 - February 2026',
+    bullets: [
+      'Designed social media content for different events while maintaining a consistent visual theme and style.',
+      'Created engaging and creative posts tailored to the purpose, tone, and audience of each event.',
+      'Used Canva and Procreate to produce layouts, graphics, and custom visual elements.',
+    ],
+  },
+];
+
+function renderExperienceList() {
+  skillContentBox.innerHTML = `
+    <div class="experience-list">
+      ${experienceData.map(job => `
+        <div class="experience-card">
+          <h4 class="experience-title">${job.title}</h4>
+          <p class="experience-meta">${job.org} &middot; ${job.period}</p>
+          <ul class="experience-bullets">
+            ${job.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
 
 const certData = [
   {
@@ -485,7 +525,10 @@ function renderMoreTab(tabName, folderIconEl) {
   folderIconEl.classList.add('selected');
   folderIconEl.querySelector('.folder').classList.add('opened');
 
-  if (tabName === 'certifications') {
+  if (tabName === 'experience') {
+    skillContentTitle.textContent = 'Experience';
+    renderExperienceList();
+  } else if (tabName === 'certifications') {
     skillContentTitle.textContent = 'Achievements Certifications';
     expandedCertIndex = null;
     renderCertList();
@@ -521,6 +564,7 @@ moreItems.forEach(item => {
 });
 
 const moreOptionLabels = {
+  experience: 'experience',
   certifications: 'certs',
   portfolio: 'portfolio',
   resume: 'resume',
@@ -617,7 +661,7 @@ projSidebarToggle.addEventListener('click', (e) => {
 const projectData = {
   bharabas: {
     title: 'Bharabas Radio App Prototype',
-    desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
+    desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan Internship (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
     skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Agile', 'Client Communication'],
     images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
