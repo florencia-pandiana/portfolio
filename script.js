@@ -13,9 +13,15 @@ function applyTheme(theme) {
   }
 }
 
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const savedTheme = localStorage.getItem('theme');
-const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-applyTheme(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
+applyTheme(savedTheme || (darkModeQuery.matches ? 'dark' : 'light'));
+
+darkModeQuery.addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    applyTheme(e.matches ? 'dark' : 'light');
+  }
+});
 
 themeToggle.addEventListener('click', (e) => {
   e.stopPropagation();
