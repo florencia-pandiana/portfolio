@@ -325,7 +325,6 @@ renderAboutSkillsNetwork();
 const moreItems = document.querySelectorAll('.skill-icon');
 const skillContentTitle = document.getElementById('skillContentTitle');
 const skillContentBox = document.getElementById('skillContentBox');
-const infoSkills = document.getElementById('info-skills');
 
 const experienceData = [
   {
@@ -516,7 +515,6 @@ function renderPortfolio() {
 let currentMoreTab = null;
 
 function renderMoreTab(tabName, folderIconEl) {
-  infoSkills.classList.remove('no-selection');
   currentMoreTab = tabName;
 
   moreItems.forEach(i => {
@@ -555,12 +553,7 @@ function renderMoreTab(tabName, folderIconEl) {
 moreItems.forEach(item => {
   item.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isOpen = item.querySelector('.folder').classList.contains('opened');
-    if (isOpen) {
-      resetSkillsPanel();
-    } else {
-      renderMoreTab(item.dataset.more, item);
-    }
+    renderMoreTab(item.dataset.more, item);
   });
 });
 
@@ -591,55 +584,16 @@ document.getElementById('skillContentNext').addEventListener('click', (e) => {
   goToMoreTab(1);
 });
 
-function renderEmptyState() {
-  skillContentBox.innerHTML = `
-    <div class="empty-state-icons">
-      ${Object.entries(moreOptionLabels).map(([key, label]) => `
-        <div class="skill-icon empty-state-icon" data-more="${key}">
-          <div class="folder">
-            <div class="folder-tab"></div>
-            <div class="folder-body"></div>
-            <div class="folder-body1"></div>
-            <div class="folder-body2"><span>flo</span></div>
-            <img src="star.png" alt="star">
-          </div>
-          <span>${label}</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  skillContentBox.querySelectorAll('.empty-state-icon').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const sidebarItem = Array.from(moreItems).find(i => i.dataset.more === el.dataset.more);
-      renderMoreTab(el.dataset.more, sidebarItem);
-    });
-  });
+function showDefaultMoreTab() {
+  const experienceItem = Array.from(moreItems).find(i => i.dataset.more === 'experience');
+  renderMoreTab('experience', experienceItem);
 }
 
-function resetSkillsPanel() {
-  infoSkills.classList.add('no-selection');
-  currentMoreTab = null;
+document.getElementById('folder3').addEventListener('click', showDefaultMoreTab);
 
-  moreItems.forEach(i => {
-    i.classList.remove('selected');
-    i.querySelector('.folder').classList.remove('opened');
-  });
-  skillContentTitle.textContent = 'Select an option';
-  renderEmptyState();
-}
+document.getElementById('closeSkills').addEventListener('click', showDefaultMoreTab);
 
-document.getElementById('folder3').addEventListener('click', () => {
-  const isNowClosed = !document.getElementById('folder3').classList.contains('opened');
-  if (isNowClosed) {
-    resetSkillsPanel();
-  }
-});
-
-document.getElementById('closeSkills').addEventListener('click', resetSkillsPanel);
-
-resetSkillsPanel();
+showDefaultMoreTab();
 
 /*---projects panel---*/
 
