@@ -315,7 +315,7 @@ registerFolderToggle('folder3', 'infoWrapperSkills', 'closeSkills');
 /*---About Me: skill badges---*/
 
 function renderAboutSkillsNetwork() {
-  const skills = ['HTML', 'CSS', 'JavaScript', 'Java', 'SQL'];
+  const skills = ['HTML', 'CSS', 'JavaScript', 'Java', 'SQL', 'React'];
 
   const badges = skills.map(name => `
     <span class="skill-badge" data-skill="${name}">${name}</span>
@@ -601,6 +601,14 @@ document.getElementById('closeSkills').addEventListener('click', showDefaultMore
 
 showDefaultMoreTab();
 
+const infoSkills = document.getElementById('info-skills');
+const skillSidebarToggle = document.getElementById('skillSidebarToggle');
+
+skillSidebarToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  infoSkills.classList.toggle('sidebar-collapsed');
+});
+
 /*---projects panel---*/
 
 const projItems = document.querySelectorAll('.proj-item');
@@ -623,7 +631,7 @@ const projectData = {
   bharabas: {
     title: 'Bharabas Radio App Prototype',
     desc: 'Designed a high-fidelity mobile app prototype in Figma for Bharabas, a news-focused radio station in Indonesia, as part of the New Colombo Plan Internship (NCP). Collaborated with an international team using Agile methodologies to conduct user research, create wireframes and interactive prototypes, and present a client-focused solution that modernised the radio listening experience.',
-    skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Agile', 'Client Communication'],
+    skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Agile', 'Client Communication', 'Usability Testing'],
     images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
   cashflo: {

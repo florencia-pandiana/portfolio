@@ -78,7 +78,7 @@ html {
   --color-skill-badge-bg: #6f6d6b;
   --color-skill-badge-border: #a2a2a1;
   --color-divider-project: #7a7a7a;
-  --color-proj-sidebar-toggle-bg: rgba(62, 61, 61, 0.3);
+  --color-proj-sidebar-toggle-bg: rgba(204, 204, 204, 0.754);
   --color-proj-sidebar-toggle-border: #7a7a7a;
   --color-proj-item-text: #ebebeb;
   --color-proj-item-selected-bg: #5f5e5c;
@@ -680,7 +680,8 @@ img {
 #infoWrapperAbout {
   width: min(90%, 45rem);
   max-width: 40rem;
-  height: 55%;
+  height: auto;
+  max-height: 90%;
   top: 46%;
 }
 
@@ -732,7 +733,8 @@ img {
 .info-about {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   background-color: var(--color-info-about-bg);
   border-radius: 1.5rem;
   overflow: hidden;
@@ -748,6 +750,11 @@ img {
 @media (max-width: 600px) {
   .info-about {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-photo {
+    width: min(60%, 14rem);
+    margin: 0 auto;
   }
 }
 
@@ -779,6 +786,12 @@ img {
   flex-direction: column;
   gap: 0.5rem;
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .info-profile-pic {
+    max-height: 17rem;
+  }
 }
 
 .info-name {
@@ -894,22 +907,26 @@ img {
   top: 50%;
   transform: translateY(-50%);
   height: 90%;
-  left: min(20%, 10rem);
+  left: min(14%, 7rem);
   width: 1px;
   background-color: var(--color-divider-project);
 }
 
 .proj-sidebar-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.3rem;
+  height: 1.3rem;
   background-color: var(--color-proj-sidebar-toggle-bg);
   border: 1px solid var(--color-proj-sidebar-toggle-border);
-  border-radius: 0.4rem;
+  border-radius: 0.35rem;
   cursor: pointer;
-  padding: 0.3rem;
+  padding: 0.2rem;
   box-sizing: border-box;
   transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -942,7 +959,7 @@ img {
 .proj-list {
   position: absolute;
   left: 1%;
-  right: calc(100% - min(20%, 10rem) + 1%);
+  right: calc(100% - min(14%, 7rem) + 1%);
   top: 2.5rem;
   bottom: 1rem;
   display: flex;
@@ -980,8 +997,8 @@ img {
 
 .proj-gallery {
   position: absolute;
-  left: min(20%, 10rem);
-  width: calc(min(65%, 45rem) - min(20%, 10rem) - 2rem);
+  left: min(16%, 8rem);
+  width: calc(min(65%, 45rem) - min(16%, 8rem) - 2rem);
   top: 2.5rem;
   bottom: 1rem;
   margin-left: 1rem;
@@ -1346,6 +1363,31 @@ img {
   top: 10%;
   right: 3%;
   height: 85%;
+  transition: left 0.6s ease;
+}
+
+@media (max-width: 700px) {
+  .list-of-skills {
+    left: 3%;
+    right: calc(100% - 32%);
+  }
+
+  .divider-skills {
+    left: 36%;
+  }
+
+  .skill-content {
+    left: 40%;
+  }
+}
+
+.info-skills.sidebar-collapsed .list-of-skills,
+.info-skills.sidebar-collapsed .divider-skills {
+  display: none;
+}
+
+.info-skills.sidebar-collapsed .skill-content {
+  left: 3%;
 }
 
 .skill-content-header {
@@ -1354,6 +1396,7 @@ img {
   justify-content: space-between;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
+  margin-right: 2.75rem;
   padding: 0.5rem 0.9rem;
   background-color: var(--color-skill-content-header-bg);
   border-radius: 0.6rem;
