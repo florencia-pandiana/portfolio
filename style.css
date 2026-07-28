@@ -9,7 +9,7 @@ html {
   --color-body-shine: rgba(255, 255, 255, 0.65);
   --color-todo-bg: #faf8f8;
   --color-theme-toggle-bg: #FFFFFF;
-  --color-lockscreen-text: #6E7378;
+  --color-lockscreen-text: #5d6063;
   --color-folder-tab-bg: #bebebe;
   --color-folder-body1-bg: #ffffff;
   --color-folder-body2-bg: #d6d6d6;
@@ -352,6 +352,7 @@ body > .placeholder1 {
   z-index: 3;
   font-family: "Palanquin Dark", sans-serif;
   color: var(--color-folder-body2-label);
+  text-shadow: none;
   font-size: 45cqw;
   font-weight: 500;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -568,6 +569,7 @@ img {
   gap: 0.3rem;
   font-size: 0.9rem;
   color: var(--color-lockscreen-text);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .whole-folder .folder {
@@ -658,6 +660,78 @@ img {
   /* left: rem; */
   width: 0.85rem;
   transform: perspective(120px) rotateX(-30deg);
+}
+
+/*---whole-folder: bigger icons on phone---*/
+
+@media (max-width: 700px) {
+  .whole-folder .folder-icon {
+    gap: 0.4rem;
+    font-size: 1.1rem;
+  }
+
+  .whole-folder .folder {
+    width: 4.8rem;
+    height: 3.8rem;
+  }
+
+  .whole-folder .folder-tab {
+    height: 0.2rem;
+  }
+
+  .whole-folder .folder-body {
+    height: 3.4rem;
+    border-radius: 0 0.45rem 0.45rem 0.45rem;
+  }
+
+  .whole-folder .folder-body1 {
+    top: 0.38rem;
+    height: 2.85rem;
+    border-radius: 0.45rem;
+  }
+
+  .whole-folder .folder-body2 {
+    top: 0.57rem;
+    height: 3.33rem;
+    font-size: 1.8rem;
+    border-radius: 0.45rem;
+  }
+
+  .whole-folder img {
+    width: 1.2rem;
+    top: 0.8rem;
+  }
+
+  .whole-folder .folder.opened {
+    width: 5.25rem;
+    height: 4.2rem;
+  }
+
+  .whole-folder .folder.opened .folder-tab {
+    height: 0.36rem;
+    margin-bottom: -0.1rem;
+    border-radius: 0.2rem 0.2rem 0 0;
+  }
+
+  .whole-folder .folder.opened .folder-body {
+    height: 3rem;
+    border-radius: 0 0.34rem;
+  }
+
+  .whole-folder .folder.opened .folder-body1 {
+    border-radius: 0.34rem;
+  }
+
+  .whole-folder .folder.opened .folder-body2 {
+    top: 0.84rem;
+    height: 3rem;
+    border-radius: 0.34rem;
+  }
+
+  .whole-folder .folder.opened img {
+    top: 1.08rem;
+    width: 1.2rem;
+  }
 }
 
 /*---info modals---*/
@@ -907,7 +981,7 @@ img {
   top: 50%;
   transform: translateY(-50%);
   height: 90%;
-  left: min(14%, 7rem);
+  left: min(16%, 8rem);
   width: 1px;
   background-color: var(--color-divider-project);
 }
@@ -959,7 +1033,7 @@ img {
 .proj-list {
   position: absolute;
   left: 1%;
-  right: calc(100% - min(14%, 7rem) + 1%);
+  right: calc(100% - min(16%, 8rem) + 1%);
   top: 2.5rem;
   bottom: 1rem;
   display: flex;
@@ -1206,9 +1280,7 @@ img {
     margin-left: 0;
   }
 
-  /* The clamp()'s 38vw preferred value only ever won out on wide
-     screens; on phone it always bottomed out at the 13rem floor,
-     squeezing the title/date onto multiple lines. */
+
   .todo,
   .whole-folder {
     width: min(90vw, 26rem);
@@ -1393,10 +1465,10 @@ img {
 .skill-content-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
-  margin-right: 2.75rem;
+  /* margin-right: 2.75rem; */
   padding: 0.5rem 0.9rem;
   background-color: var(--color-skill-content-header-bg);
   border-radius: 0.6rem;
@@ -1647,6 +1719,7 @@ img {
   cursor: grab;
   user-select: none;
   perspective: 60rem;
+  container-type: size;
 }
 
 .portfolio-stage:active {
@@ -1655,10 +1728,10 @@ img {
 
 .portfolio-card {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  height: 100%;
-  width: auto;
+  width: min(100cqw, 100cqh);
+  height: min(100cqw, 100cqh);
   aspect-ratio: 1 / 1;
   padding: 0.4rem;
   box-sizing: border-box;
@@ -1692,16 +1765,16 @@ img {
 }
 
 .portfolio-card-prev {
-  transform: translate(-96%, 0) scale(0.85) rotateY(35deg);
+  transform: translate(-96%, -50%) scale(0.85) rotateY(35deg);
 }
 
 .portfolio-card-next {
-  transform: translate(-4%, 0) scale(0.85) rotateY(-35deg);
+  transform: translate(-4%, -50%) scale(0.85) rotateY(-35deg);
 }
 
 .portfolio-card-main {
   z-index: 2;
-  transform: translate(-50%, 0) scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .portfolio-info {

@@ -149,7 +149,8 @@ function dockCardBesideTodo(card) {
   const rootPx = getRootFontSizePx();
   const target = cardEndTargets[card.id];
   const todoRect = todoEl.getBoundingClientRect();
-  const gapPx = 9 * rootPx;
+  const isLaptop = window.innerWidth > 700;
+  const gapPx = (isLaptop ? 5 : 9) * rootPx;
   const widthPx = target.widthRem * rootPx;
   const heightPx = target.heightRem * rootPx;
 
@@ -162,13 +163,13 @@ function dockCardBesideTodo(card) {
   if (card.id === 'card1') {
     const desiredLeft = todoRect.left - widthPx - gapPx;
     leftPx = Math.min(Math.max(desiredLeft, screenMarginPx), todoRect.left - maxOverlapPx);
-    topPx = todoRect.top - heightPx * 0.6;
+    topPx = todoRect.top - heightPx * 0.5;
   } else if (card.id === 'card2') {
     const desiredLeft = todoRect.left - widthPx - gapPx;
     leftPx = Math.min(Math.max(desiredLeft, screenMarginPx), todoRect.left - maxOverlapPx);
     topPx = todoRect.bottom - heightPx + heightPx * 0.6;
   } else {
-    const coffeeGapPx = 9 * rootPx;
+    const coffeeGapPx = (isLaptop ? 5 : 9) * rootPx;
     const desiredLeft = todoRect.right + coffeeGapPx;
     const maxLeft = window.innerWidth - widthPx - screenMarginPx;
     leftPx = Math.max(Math.min(desiredLeft, maxLeft), todoRect.right - maxOverlapPx);
