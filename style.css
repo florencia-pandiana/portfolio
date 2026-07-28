@@ -11,76 +11,43 @@ html {
   --color-theme-toggle-bg: #FFFFFF;
   --color-lockscreen-text: #6E7378;
   --color-folder-tab-bg: #bebebe;
-  --color-folder-body-bg: #bebebe;
   --color-folder-body1-bg: #ffffff;
   --color-folder-body2-bg: #d6d6d6;
   --color-taskbar-bg: #b1b1b18c;
-  --color-dock-icon-bg: #b1b1b18c;
   --color-dock-icon-hover-bg: #b1b1b1c9;
   --color-todo-title: #444441;
   --color-todo-date: #8A887F;
-  --color-todo-day-label: #8A887F;
-  --color-todo-day-num: #444441;
   --color-todo-today-bg: #c6d1d8;
   --color-todo-checkbox-border: #B4B2A9;
-  --color-todo-checkbox-bg: #FFFFFF;
-  --color-todo-checkbox-checked-bg: #c6d1d8;
   --color-todo-checkbox-checked-border: #a8b1b7;
-  --color-todo-label: #444441;
-  --color-folder-icon-label: #6E7378;
   --color-info-about-bg: #ffffff;
-  --color-info-name: #444441;
   --color-info-intro: #5F5E5A;
-  --color-skill-badge-text: #6E7378;
   --color-skill-badge-bg: #EFEDE7;
   --color-skill-badge-border: #D3D1C7;
-  --color-info-project-bg: #ffffff;
   --color-divider-project: #b8c4cb;
-  --color-divider-project2: #b8c4cb;
   --color-proj-sidebar-toggle-bg: #ebebeb;
   --color-proj-sidebar-toggle-border: #98999a;
-  --color-proj-sidebar-toggle-hover-bg: #FFFFFF;
   --color-proj-item-text: #646566;
   --color-proj-item-selected-bg: #c4cacf;
   --color-proj-dot-bg: #5c5f62;
   --color-proj-gallery-frame-bg: #d7d9db;
   --color-proj-nav-btn-bg: #d2d9de;
-  --color-proj-nav-btn-text: #6E7378;
   --color-proj-thumb-bg: #DCDCDC;
   --color-proj-thumb-active-border: #6E7378;
   --color-proj-detail-title: #444441;
   --color-proj-detail-desc: #5F5E5A;
-  --color-proj-detail-subhead: #444441;
-  --color-proj-detail-list: #5F5E5A;
-  --color-proj-tech-tag-text: #6E7378;
   --color-proj-tech-tag-bg: #EFEDE7;
-  --color-info-skills-bg: #ffffff;
-  --color-divider-skills: #b8c4cb;
-  --color-skill-icon-text: #6E7378;
-  --color-skill-icon-selected-bg: #bebebe;
   --color-skill-content-header-bg: #eae8e8;
-  --color-skill-content-title: #444441;
-  --color-skill-content-nav: #6E7378;
-  --color-more-placeholder-text: #6E7378;
   --color-experience-card-bg: #FFFFFF;
   --color-experience-accent: #6c8da1;
-  --color-experience-title: #444441;
-  --color-experience-meta: #8A887F;
-  --color-experience-bullets: #6E7378;
   --color-cert-group-bg: #ebebeb;
   --color-cert-row-hover-bg: rgba(60, 60, 67, 0.06);
   --color-portfolio-card-bg: #DCDCDC;
-  --color-portfolio-info-text: #444441;
-  --color-portfolio-subtitle: #6E7378;
   --color-portfolio-dot-bg: #C6C6C8;
   --color-portfolio-dot-active-bg: #6c8da1;
-  --color-resume-preview-bg: #FFFFFF;
   --color-proj-list-bg: rgba(220, 220, 220, 0.661);
-  --color-list-of-skills-bg: rgba(220, 220, 220, 0.661);
   --color-folder-body2-label: #A4A4A4;
-  --color-todo-checkbox-check: #FFFFFF;
   --color-todo-label-checked: #A9A7A0;
-  --color-cert-row-icon-text: #FFFFFF;
   --color-cert-row-border: rgba(60, 60, 67, 0.13);
   --color-cert-row-title: #1C1C1E;
   --color-cert-row-chevron: #C6C6C8;
@@ -97,76 +64,43 @@ html {
   --color-theme-toggle-bg: #76726b;
   --color-lockscreen-text: #ebebeb;
   --color-folder-tab-bg: #a7a7a7;
-  --color-folder-body-bg: #a7a7a7;
   --color-folder-body1-bg: #ffffff;
   --color-folder-body2-bg: #d6d6d6;
   --color-taskbar-bg: #5b5b5b;
-  --color-dock-icon-bg: #5b5b5b;
   --color-dock-icon-hover-bg: #2a2825e0;
   --color-todo-title: #ececec;
   --color-todo-date: #cecece;
-  --color-todo-day-label: #cecece;
-  --color-todo-day-num: #ececec;
   --color-todo-today-bg: #939fa6;
   --color-todo-checkbox-border: #7a7a7a;
-  --color-todo-checkbox-bg: #76726b;
-  --color-todo-checkbox-checked-bg: #939fa6;
   --color-todo-checkbox-checked-border: #aab5bb;
-  --color-todo-label: #ececec;
-  --color-folder-icon-label: #ebebeb;
   --color-info-about-bg: #292929;
-  --color-info-name: #ececec;
   --color-info-intro: #dddbdb;
-  --color-skill-badge-text: #ebebeb;
   --color-skill-badge-bg: #6f6d6b;
   --color-skill-badge-border: #a2a2a1;
-  --color-info-project-bg: #292929;
   --color-divider-project: #7a7a7a;
-  --color-divider-project2: #7a7a7a;
   --color-proj-sidebar-toggle-bg: rgba(62, 61, 61, 0.3);
   --color-proj-sidebar-toggle-border: #7a7a7a;
-  --color-proj-sidebar-toggle-hover-bg: #76726b;
   --color-proj-item-text: #ebebeb;
   --color-proj-item-selected-bg: #5f5e5c;
   --color-proj-dot-bg: #dddbdb;
   --color-proj-gallery-frame-bg: rgba(119, 118, 118, 0.3);
   --color-proj-nav-btn-bg: rgba(119, 118, 118, 0.3);
-  --color-proj-nav-btn-text: #ebebeb;
   --color-proj-thumb-bg: #888787;
   --color-proj-thumb-active-border: #676666;
   --color-proj-detail-title: #ffffff;
   --color-proj-detail-desc: #f4f2f2;
-  --color-proj-detail-subhead: #ffffff;
-  --color-proj-detail-list: #dddbdb;
-  --color-proj-tech-tag-text: #ebebeb;
   --color-proj-tech-tag-bg: rgba(119, 118, 118, 0.3);
-  --color-info-skills-bg: #292929;
-  --color-divider-skills: #7a7a7a;
-  --color-skill-icon-text: #ebebeb;
-  --color-skill-icon-selected-bg: #a7a7a7;
   --color-skill-content-header-bg: rgba(119, 118, 118, 0.3);
-  --color-skill-content-title: #ececec;
-  --color-skill-content-nav: #ebebeb;
-  --color-more-placeholder-text: #ebebeb;
   --color-experience-card-bg: #7d7c7b;
   --color-experience-accent: #bdbdbc;
-  --color-experience-title: #ececec;
-  --color-experience-meta: #cecece;
-  --color-experience-bullets: #ebebeb;
   --color-cert-group-bg: rgba(119, 118, 118, 0.3);
   --color-cert-row-hover-bg: rgba(255, 255, 255, 0.08);
   --color-portfolio-card-bg: rgb(119, 118, 118);
-  --color-portfolio-info-text: #ececec;
-  --color-portfolio-subtitle: #ebebeb;
   --color-portfolio-dot-bg: #7a7a7a;
   --color-portfolio-dot-active-bg: #7696a9;
-  --color-resume-preview-bg: #76726b;
   --color-proj-list-bg: rgba(119, 118, 118, 0.3);
-  --color-list-of-skills-bg: rgba(119, 118, 118, 0.3);
   --color-folder-body2-label: #A4A4A4;
-  --color-todo-checkbox-check: #FFFFFF;
   --color-todo-label-checked: #9c9a93;
-  --color-cert-row-icon-text: #FFFFFF;
   --color-cert-row-border: rgba(255, 255, 255, 0.13);
   --color-cert-row-title: #ececec;
   --color-cert-row-chevron: #cecece;
@@ -283,6 +217,10 @@ body {
   transition: none;
 }
 
+body > .placeholder1 {
+  z-index: -1;
+}
+
 .placeholder1 { top: -50%; height: 85%; left: -5%; transform: rotate(-15deg); width: 60%; }
 .placeholder2 { top: -75%; height: 100%; left: 20%; transform: rotate(5deg); width: 60%; }
 .placeholder3 { top: -65%; height: 100%; left: 45%; transform: rotate(20deg); width: 60%; }
@@ -380,7 +318,7 @@ body {
   position: relative;
   width: 100%;
   height: 25%;
-  background-color: var(--color-folder-body-bg);
+  background-color: var(--color-folder-tab-bg);
   border-radius: 0 0.75rem 0 0;
   transition: height 0.4s ease, border-radius 0.4s ease;
 }
@@ -459,7 +397,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-dock-icon-bg);
+  background-color: var(--color-taskbar-bg);
   border-radius: 1rem;
   box-sizing: border-box;
   cursor: pointer;
@@ -559,12 +497,12 @@ img {
 
 .todo-day-label {
   font-size: clamp(0.6rem, 1.1vh, 0.75rem);
-  color: var(--color-todo-day-label);
+  color: var(--color-todo-date);
 }
 
 .todo-day-num {
   font-size: clamp(0.85rem, 1.6vh, 1.05rem);
-  color: var(--color-todo-day-num);
+  color: var(--color-todo-title);
   font-weight: 500;
 }
 
@@ -598,24 +536,24 @@ img {
   flex-shrink: 0;
   border: 1.5px solid var(--color-todo-checkbox-border);
   border-radius: 0.3rem;
-  background-color: var(--color-todo-checkbox-bg);
+  background-color: var(--color-theme-toggle-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
-  color: var(--color-todo-checkbox-check);
+  color: var(--color-folder-body1-bg);
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .todo-checkbox.checked {
-  background-color: var(--color-todo-checkbox-checked-bg);
+  background-color: var(--color-todo-today-bg);
   border-color: var(--color-todo-checkbox-checked-border);
 }
 
 .todo-label {
   font-size: clamp(0.75rem, 1.4vh, 0.9rem);
-  color: var(--color-todo-label);
+  color: var(--color-todo-title);
 }
 
 .todo-label.checked {
@@ -629,7 +567,7 @@ img {
   align-items: center;
   gap: 0.3rem;
   font-size: 0.9rem;
-  color: var(--color-folder-icon-label);
+  color: var(--color-lockscreen-text);
 }
 
 .whole-folder .folder {
@@ -847,7 +785,7 @@ img {
   margin: 0;
   flex-shrink: 0;
   font-size: clamp(1rem, 2.2vh + 0.3vw, 1.6rem);
-  color: var(--color-info-name);
+  color: var(--color-todo-title);
   text-align: left;
 }
 
@@ -886,7 +824,7 @@ img {
 .skill-badge {
   display: inline-block;
   font-size: clamp(0.65rem, 1.3vh, 0.85rem);
-  color: var(--color-skill-badge-text);
+  color: var(--color-lockscreen-text);
   background-color: var(--color-skill-badge-bg);
   border: 1px solid var(--color-skill-badge-border);
   padding: 0.3rem 0.9rem;
@@ -935,7 +873,7 @@ img {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: var(--color-info-project-bg);
+  background-color: var(--color-info-about-bg);
   border-radius: 1.5rem;
   overflow: hidden;
 }
@@ -958,7 +896,7 @@ img {
   height: 90%;
   left: min(20%, 10rem);
   width: 1px;
-  background-color: var(--color-divider-project2);
+  background-color: var(--color-divider-project);
 }
 
 .proj-sidebar-toggle {
@@ -977,7 +915,7 @@ img {
 }
 
 .proj-sidebar-toggle:hover {
-  background-color: var(--color-proj-sidebar-toggle-hover-bg);
+  background-color: var(--color-theme-toggle-bg);
   transform: scale(1.08);
   box-shadow: 0 0.08rem 0.3rem rgba(0, 0, 0, 0.2);
 }
@@ -1006,7 +944,7 @@ img {
   left: 1%;
   right: calc(100% - min(20%, 10rem) + 1%);
   top: 2.5rem;
-  bottom: 2.5rem;
+  bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -1113,7 +1051,7 @@ img {
   box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.15);
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--color-proj-nav-btn-text);
+  color: var(--color-lockscreen-text);
   cursor: pointer;
   padding: 0;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -1184,7 +1122,7 @@ img {
 .proj-detail-subhead {
   margin: 1rem 0 0.5rem;
   font-size: clamp(0.85rem, 1.6vh, 1.1rem);
-  color: var(--color-proj-detail-subhead);
+  color: var(--color-proj-detail-title);
 }
 
 .proj-detail-list {
@@ -1192,7 +1130,7 @@ img {
   padding-left: 1.2rem;
   font-size: clamp(0.7rem, 1.3vh, 1rem);
   line-height: 1.6;
-  color: var(--color-proj-detail-list);
+  color: var(--color-info-intro);
 }
 
 .proj-tech-list {
@@ -1203,7 +1141,7 @@ img {
 
 .proj-tech-tag {
   font-size: clamp(0.6rem, 1.1vh, 0.8rem);
-  color: var(--color-proj-tech-tag-text);
+  color: var(--color-lockscreen-text);
   background-color: var(--color-proj-tech-tag-bg);
   padding: 0.2rem 0.6rem;
   border-radius: 1rem;
@@ -1250,6 +1188,14 @@ img {
     width: auto;
     margin-left: 0;
   }
+
+  /* The clamp()'s 38vw preferred value only ever won out on wide
+     screens; on phone it always bottomed out at the 13rem floor,
+     squeezing the title/date onto multiple lines. */
+  .todo,
+  .whole-folder {
+    width: min(90vw, 26rem);
+  }
 }
 
 /*---More panel---*/
@@ -1258,7 +1204,7 @@ img {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: var(--color-info-skills-bg);
+  background-color: var(--color-info-about-bg);
   border-radius: 1.5rem;
   overflow: hidden;
   transition: width 0.4s ease, height 0.4s ease;
@@ -1266,26 +1212,29 @@ img {
 
 .divider-skills {
   position: absolute;
-  top: max(7%, 2.7rem);
-  bottom: 1%;
-  left: min(20%, 10rem);
+  /* top: max(4%, 2rem);
+  bottom: 5%; */
+  top: 50%;
+  transform: translateY(-50%);
+  height: 90%;
+  left: min(22%, 20rem);
   width: 1px;
-  background-color: var(--color-divider-skills);
+  background-color: var(--color-divider-project);
 }
 
 .list-of-skills {
   position: absolute;
   left: 1%;
   right: calc(100% - min(20%, 10rem) + 1%);
-  top: calc(max(7%, 2.7rem) + 1rem);
-  bottom: 5%;
+  top: 2.5rem;
+  bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   overflow-y: auto;
   box-sizing: border-box;
-  background-color: var(--color-list-of-skills-bg);
+  background-color: var(--color-proj-list-bg);
   padding: 2rem 0 0.5rem;
   border-radius: 0.6rem;
 }
@@ -1296,7 +1245,7 @@ img {
   align-items: center;
   gap: 0.2rem;
   font-size: 0.7rem;
-  color: var(--color-skill-icon-text);
+  color: var(--color-lockscreen-text);
   flex-shrink: 0;
   cursor: pointer;
   width: 3.9rem;
@@ -1317,7 +1266,7 @@ img {
 
 .list-of-skills .folder-body {
   height: 2.45rem;
-  border-radius: 0 0.32rem 0.32rem 0.32rem;
+  border-radius: 0 0.3rem 0.3rem 0.3rem;
 }
 
 .list-of-skills .folder-body1 {
@@ -1330,9 +1279,9 @@ img {
   top: 0.41rem;
   left: -2%;
   height: 2.38rem;
-  width: 103%;
+  width: 102%;
   font-size: 1.28rem;
-  border-radius: 0.32rem;
+  border-radius: 0.3rem;
 }
 
 .list-of-skills img {
@@ -1388,7 +1337,7 @@ img {
 
 .skill-icon.selected .folder-body,
 .skill-icon.selected .folder-body1 {
-  background-color: var(--color-skill-icon-selected-bg);
+  background-color: var(--color-folder-tab-bg);
 }
 
 .skill-content {
@@ -1413,7 +1362,7 @@ img {
 .skill-content-title {
   margin: 0;
   font-size: 1.1rem;
-  color: var(--color-skill-content-title);
+  color: var(--color-todo-title);
 }
 
 .skill-content-nav {
@@ -1421,7 +1370,7 @@ img {
   border: none;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-skill-content-nav);
+  color: var(--color-lockscreen-text);
   cursor: pointer;
   padding: 0.1rem 0.4rem;
   flex-shrink: 0;
@@ -1449,7 +1398,7 @@ img {
   box-sizing: border-box;
   text-align: center;
   font-size: clamp(0.75rem, 1.4vh, 1rem);
-  color: var(--color-more-placeholder-text);
+  color: var(--color-lockscreen-text);
 }
 
 /*---skill content: smooth fade whenever the panel content swaps---*/
@@ -1487,13 +1436,13 @@ img {
 .experience-title {
   margin: 0;
   font-size: clamp(0.85rem, 1.6vh, 1.05rem);
-  color: var(--color-experience-title);
+  color: var(--color-todo-title);
 }
 
 .experience-meta {
   margin: 0.3rem 0 0;
   font-size: clamp(0.65rem, 1.2vh, 0.8rem);
-  color: var(--color-experience-meta);
+  color: var(--color-todo-date);
 }
 
 .experience-bullets {
@@ -1501,7 +1450,7 @@ img {
   padding-left: 1.1rem;
   font-size: clamp(0.7rem, 1.3vh, 0.85rem);
   line-height: 1.5;
-  color: var(--color-experience-bullets);
+  color: var(--color-lockscreen-text);
 }
 
 .experience-bullets li {
@@ -1555,7 +1504,7 @@ img {
   height: 1.6rem;
   margin: 0.55rem 0;
   border-radius: 0.45rem;
-  color: var(--color-cert-row-icon-text);
+  color: var(--color-folder-body1-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1716,7 +1665,7 @@ img {
   width: 100%;
   max-width: 20rem;
   text-align: center;
-  color: var(--color-portfolio-info-text);
+  color: var(--color-todo-title);
 }
 
 .portfolio-card-title {
@@ -1728,7 +1677,7 @@ img {
 .portfolio-card-subtitle {
   margin: 0.25rem 0 0;
   font-size: 0.75rem;
-  color: var(--color-portfolio-subtitle);
+  color: var(--color-lockscreen-text);
 }
 
 .portfolio-nav {
@@ -1773,7 +1722,7 @@ img {
   flex: 1;
   height: 100%;
   max-width: 42rem;
-  background-color: var(--color-resume-preview-bg);
+  background-color: var(--color-theme-toggle-bg);
   border-radius: 0.6rem;
   box-shadow: 0 0.15rem 0.5rem rgba(0, 0, 0, 0.12);
   overflow: hidden;
