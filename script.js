@@ -635,18 +635,17 @@ const projectData = {
     skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Agile', 'Client Communication', 'Usability Testing'],
     images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
-  cashflo: {
-    title: 'CashFlo Budget Tracker',
-    desc: 'Built CashFlo, a Java personal finance tracker designed with object-oriented programming principles. Implemented transaction management, category-based reporting, CSV data persistence, and an interactive command-line interface. The project highlights skills in software architecture, data handling, file operations, and modular Java development.',
+  bookrecommendation: {
+    title: 'Book Recommendation Web',
+    desc: 'Contributed a book discovery widget to a group project where each member built and owned an individual web component, using LitElement and the Open Library API to surface real-time book data.',
     features: [
-      'Add, edit, and manage income and expense transactions',
-      'View complete transaction history',
-      'Generate category-based spending summaries',
-      'Save and load financial data using CSV files',
-      'Interactive menu-driven command-line interface',
+      'Implemented lazy-loading for book descriptions to optimize performance',
+      'Debugged and resolved CSS overflow issues to ensure a clean, responsive UI',
+      'Applied core JavaScript design patterns to structure component logic',
+      'Delivered a functional, reusable front-end component demonstrating web component architecture and API integration',
     ],
-    skills: ['Java', 'Object-Oriented Programming', 'Software Architecture', 'File I/O', 'CSV Data Handling', 'CLI Design'],
-    images: ['CashFlo1.png', 'CashFlo2.png', 'CashFlo3.png', 'CashFlo4.png', 'CashFlo5.png', 'CashFlo6.png', 'CashFlo7.png'],
+    skills: ['LitElement', 'Web Components', 'JavaScript', 'REST API Integration', 'CSS', 'Responsive Design', 'Debugging'],
+    images: ['BookRecommendation1.png', 'BookRecommendation2.png', 'BookRecommendation3.png', 'BookRecommendation4.png'],
   },
   simba: {
     title: 'Simba',
@@ -660,6 +659,19 @@ const projectData = {
     ],
     skills: ['Unity', 'Visual Scripting (Script Graphs)', 'WebGL'],
     images: ['Simba1.png', 'Simba2.png', 'Simba3.png', 'Simba4.png', 'Simba5.png', 'Simba6.png', 'Simba7.png', 'Simba8.png', 'Simba9.png', 'Simba10.png', 'Simba11.png'],
+  },
+  cashflo: {
+    title: 'CashFlo Budget Tracker',
+    desc: 'Built CashFlo, a Java personal finance tracker designed with object-oriented programming principles. Implemented transaction management, category-based reporting, CSV data persistence, and an interactive command-line interface. The project highlights skills in software architecture, data handling, file operations, and modular Java development.',
+    features: [
+      'Add, edit, and manage income and expense transactions',
+      'View complete transaction history',
+      'Generate category-based spending summaries',
+      'Save and load financial data using CSV files',
+      'Interactive menu-driven command-line interface',
+    ],
+    skills: ['Java', 'Object-Oriented Programming', 'Software Architecture', 'File I/O', 'CSV Data Handling', 'CLI Design'],
+    images: ['CashFlo1.png', 'CashFlo2.png', 'CashFlo3.png', 'CashFlo4.png', 'CashFlo5.png', 'CashFlo6.png', 'CashFlo7.png'],
   },
   processinggame: {
     title: 'Processing Game',
