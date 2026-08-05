@@ -50,7 +50,9 @@ setInterval(updateClock, 10000);
 /*---todo widget---*/
 
 const todoTasks = [
-  { label: 'LockedIn', checked: false },
+  { label: 'Design', checked: false },
+  { label: 'Code', checked: false },
+  { label: 'Sleep', checked: false },
 ];
 
 const TODO_ROW_COUNT = 6;
