@@ -541,7 +541,7 @@ function renderMoreTab(tabName, folderIconEl) {
     expandedCertIndex = null;
     renderCertList();
   } else if (tabName === 'portfolio') {
-    skillContentTitle.textContent = 'Portfolio';
+    skillContentTitle.textContent = 'Design Portfolio';
     currentPortfolioIndex = 0;
     renderPortfolio();
   } else if (tabName === 'resume') {
