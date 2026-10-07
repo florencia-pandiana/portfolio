@@ -637,6 +637,12 @@ const projectData = {
     skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Agile', 'Client Communication', 'Usability Testing'],
     images: ['bharabas1.png', 'bharabas2.png', 'bharabas3.png', 'bharabas4.png', 'bharabas5.png', 'bharabas6.png', 'bharabas7.png', 'bharabas8.png', 'bharabas9.png', 'bharabas10.png'],
   },
+  pantrystory: {
+    title: 'Pantry Story & Sangcuary Website',
+    desc: 'A website for a Sydney bakery and its sister store. Visitors start on an entry page showing both storefronts, then explore each stores menu, contact info and ordering.Designed in Figma, including a custom pickup pre-order flow, and currently being built in Wix Studio with Velo.',
+    skills: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Wix Studio', 'Client Communication', 'Usability Testing', 'Velo'],
+    images: ['pantryStory.png'],
+  },
   bookrecommendation: {
     title: 'Book Recommendation Web',
     desc: 'Contributed a book discovery widget to a group project where each member built and owned an individual web component, using LitElement and the Open Library API to surface real-time book data.',
